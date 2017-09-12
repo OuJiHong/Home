@@ -13,9 +13,11 @@ if(process.env.NODE_ENV == "production"){
 
 }
 
+
 var CleanWebpackPlugin = require("clean-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 
 var webpack = require("webpack");
 
@@ -69,13 +71,10 @@ var config = {
         alias:{}
     },
     plugins:[
-      new CleanWebpackPlugin(["*"],{
+        new CleanWebpackPlugin(["*"],{
             root:path.join(__dirname, "dist"),
             verbose:true,
             dry:false
-      }),
-        new HtmlWebpackPlugin({
-            template:"src/index.html"
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name:"vendor",
@@ -83,7 +82,10 @@ var config = {
                 return module.context && module.context.indexOf("node_modules") !== -1;
             }
         }),
-        new ExtractTextPlugin("style.css")
+        new ExtractTextPlugin("style.css"),
+        new HtmlWebpackPlugin({
+            template:"src/index.html"
+        })
     ],
     externals:{
         jquery:"window.jQuery"
