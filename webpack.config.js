@@ -3,6 +3,8 @@
  */
 
 var path = require("path");
+var glob = require("glob");
+
 var publichPath = "";
 var devtool = "eval-source-map";
 
@@ -76,8 +78,10 @@ var config = {
             template:"src/index.html"
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name:"common",
-            filename:"common.js"
+            name:"vendor",
+            minChunks:function(module){
+                return module.context && module.context.indexOf("node_modules") !== -1;
+            }
         }),
         new ExtractTextPlugin("style.css")
     ],
@@ -85,6 +89,49 @@ var config = {
         jquery:"window.jQuery"
     }
 };
+
+
+//配置页面提取插件
+var pages = Object.keys(getEntry('src/views/**/*.html', 'src/views/'));
+pages.forEach(function(pathname) {
+    var conf = {
+        filename: '../views/' + pathname + '.html', //生成的html存放路径，相对于path
+        template: 'src/views/' + pathname + '.html', //html模板路径
+        inject: false,  //js插入的位置，true/'head'/'body'/false
+    };
+    if (pathname in config.entry) {
+        conf.favicon = 'src/image/favicon.ico';
+        conf.inject = 'body';
+        conf.chunks = ['vendors', pathname];
+        conf.hash = true;
+    }
+    config.plugins.push(new HtmlWebpackPlugin(conf));
+});
+
+/**
+ * 获取文件信息
+ * @param globPath
+ * @param pathDir
+ * @returns {{}}
+ */
+function getEntry (globPath, pathDir) {
+    var files = glob.sync(globPath)
+    var entries = {}, entry, dirname, basename, pathname, extname
+
+    for (var i = 0; i < files.length; i++) {
+        entry = files[i]
+        dirname = path.dirname(entry)
+        extname = path.extname(entry)
+        basename = path.basename(entry, extname)
+        pathname = path.normalize(path.join(dirname, basename))
+        pathDir = path.normalize(pathDir)
+        if (pathname.startsWith(pathDir)) {
+            pathname = pathname.substring(pathDir.length)
+        }
+        entries[pathname] = ['./' + entry]
+    }
+    return entries
+}
 
 
 module.exports = config;
