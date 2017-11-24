@@ -33,6 +33,10 @@ var config = {
         publicPath:publichPath
     },
     devtool:devtool,
+    devServer:{
+        hot:true,
+        port:8888
+    },
     module:{
         rules:[
             {
