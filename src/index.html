@@ -8,20 +8,70 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" >
     <title>首页</title>
-    <script type="text/javascript" src="jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"></link>
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.js"></script>
 </head>
 <body>
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">我的网站</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#">首页</a>
+                    </li>
+                    <li>
+                        <a href="#">文章分类</a>
+                    </li>
+                    <li>
+                        <a href="#">技术要点</a>
+                    </li>
+                    <li>
+                        <a href="#">关于我们</a>
+                    </li>
+                </ul>
 
-<div class="container">
-    <div class="jumbotron">
-        <h2>欢迎来到我的网站</h2>
-        <a href="javascript:;" class="btn btn-primary btn-lg">学习更多内容</a>
-    </div>
+            </div>
 
-</div>
+        </nav>
 
+    </header>
+
+
+    <section class="container">
+        <div class="jumbotron">
+            <div class="container">
+                <h1>入门基本法</h1>
+                <p>
+                    快速阅读，不求甚解。在极短的时间内容了解技术的概要和关键点，在实践中验证自己所思所想，只有通过自己的验证才能证明代码的可行性！
+                    所以测试是一个必要的环节，快速测试能让我们更快地接受新知识。
+
+                </p>
+
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">关键点</div>
+            <div class="panel-body">
+                <div class="list-group">
+                    <li class="list-group-item">实用点</li>
+                    <li class="list-group-item">考察点</li>
+                    <li class="list-group-item">遇到的问题</li>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <footer>
+
+    </footer>
 
 </body>
 </html>
