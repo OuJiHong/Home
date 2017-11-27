@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 使用完全限定名-->
+<mapper namespace="com.cq.home.dao.MsgDao">
+	
+	<resultMap id="msgResult" type="msg">
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+		<result column="share_url" property="shareUrl"/>
+	</resultMap>
+	
+	<select id="findList" resultMap="msgResult">
+		select * from msg 
+	</select>
+	
+	<select id="findMsg" resultMap="msgResult">
+		select * from msg where id =  #{id}
+	</select>
+	
+	
+	<select id="queryAll" resultMap="msgResult">
+		select * from msg
+	</select>
+</mapper>

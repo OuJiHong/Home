@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 使用完全限定名-->
+<mapper namespace="com.cq.home.dao.UserDao">
+	
+	<resultMap id="userResult" type="user">
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+		<result column="user_name" property="userName"/>
+		<result column="password" property="password"/>
+		<result column="image" property="image"/>
+		<result column="bg_image" property="bgImage"/>
+	</resultMap>
+	
+	<select id="findList" resultMap="userResult">
+		select * from user 
+	</select>
+	
+	
+</mapper>
