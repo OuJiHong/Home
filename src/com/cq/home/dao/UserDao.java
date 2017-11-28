@@ -8,5 +8,19 @@ import com.cq.home.bean.User;
  *
  */
 public interface UserDao extends BaseDao<User>{
-
+	
+	/**
+	 * 添加数据
+	 * @param user
+	 * @return
+	 */
+	public int add(User user);
+	
+	/**
+	 * 更新数据
+	 * @param user
+	 * @return
+	 */
+	public int update(User user);
+	
 }

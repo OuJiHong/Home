@@ -18,7 +18,7 @@ public class MybatisConfig {
 	public DataSource createDataSource(){
 		PooledDataSource dataSource = new PooledDataSource();
 		dataSource.setDriver("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/ojh?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/home?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
 		dataSource.setUsername("ojh");
 		dataSource.setPassword("123456");
 		return dataSource;
@@ -37,6 +37,7 @@ public class MybatisConfig {
 		SqlSessionTemplate sqlSession = new SqlSessionTemplate(sqlSessionFactory);
 		return sqlSession;
 	}
+	
 	
 	/**
 	 * 单独创建mapper实例

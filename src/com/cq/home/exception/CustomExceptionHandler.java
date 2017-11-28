@@ -32,10 +32,15 @@ public class CustomExceptionHandler{
 		if(ex instanceof BindException){
 			logger.error("数据校验异常:" + ex.getMessage());
 			BindException bindException = (BindException)ex;
-			FieldError fieldError = bindException.getFieldErrors().get(0);
-			message.setMsg(fieldError.getField() + fieldError.getDefaultMessage());
+			if(bindException.getFieldError() != null){
+				FieldError fieldError = bindException.getFieldError();
+				message.setMsg(fieldError.getField() + fieldError.getDefaultMessage());
+			}else{
+				message.setMsg(bindException.getGlobalError().getDefaultMessage());
+			}
 		}else if(ex instanceof BizException){
-			logger.error("业务逻辑异常:" +  ex.getMessage());
+			BizException bizException = (BizException)ex;
+			logger.error("业务逻辑异常:" + bizException.getCode() +  "(" + bizException.getMessage() + ")");
 		}else{
 			logger.error("系统内部错误", ex);
 		}

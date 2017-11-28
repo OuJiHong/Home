@@ -4,17 +4,48 @@
 <mapper namespace="com.cq.home.dao.UserDao">
 	
 	<resultMap id="userResult" type="user">
+		<result column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="password" property="password"/>
+		<result column="phone" property="phone"/>
+		<result column="age" property="age"/>
+		<result column="type" property="type"/>
+		<result column="detail" property="detail"/>
 		<result column="create_date" property="createDate"/>
 		<result column="modify_date" property="modifyDate"/>
-		<result column="user_name" property="userName"/>
-		<result column="password" property="password"/>
-		<result column="image" property="image"/>
-		<result column="bg_image" property="bgImage"/>
 	</resultMap>
 	
 	<select id="findList" resultMap="userResult">
 		select * from user 
 	</select>
+	
+	<insert id="add" >
+		insert into user(name,password,phone,age,type,detail,create_date)
+		values (#{name},#{password}, #{phone}, #{age}, #{type}, #{detail}, now() )
+	</insert>
+	
+	<update id="update">
+		update user 
+			<set>
+				modify_date = now(),
+				<if test="name != null">
+					name = #{name},
+				</if>
+				<if test="phone != null">
+					name = #{phone}
+				</if>
+				<if test="age != null">
+					age = #{age}
+				</if>
+				<if test="type != null">
+					type = #{type}
+				</if>
+				<if test="detail != null">
+					detail = #{detail}
+				</if>
+			</set>
+			where id = #{id}
+	</update>
 	
 	
 </mapper>

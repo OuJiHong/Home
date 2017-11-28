@@ -1,5 +1,7 @@
 package com.cq.home.exception;
 
+import com.cq.home.util.SpringUtils;
+
 /**
  * 业务异常
  * @author OJH
@@ -14,19 +16,20 @@ public class BizException extends Exception{
 	
 	private String code;
 	
-	private String msg;
+	private Object[] args;
 
 
-	public BizException(String code, String msg) {
-		super(msg);
+	public BizException(String code, Object... args) {
+		super(SpringUtils.getMessage(code));
 		this.code = code;
+		this.args = args;
 	}
 	
-	public BizException(String code, String msg, Throwable cause) {
-		super(msg, cause);
-		this.msg = msg;
+	public BizException(String code,Throwable cause, Object... args) {
+		super(SpringUtils.getMessage(code), cause);
+		this.code = code;
+		this.args = args;
 	}
-
 
 	public String getCode() {
 		return code;
@@ -36,13 +39,15 @@ public class BizException extends Exception{
 		this.code = code;
 	}
 
-	public String getMsg() {
-		return msg;
+	public Object[] getArgs() {
+		return args;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setArgs(Object[] args) {
+		this.args = args;
 	}
+
+
 	
 	
 }

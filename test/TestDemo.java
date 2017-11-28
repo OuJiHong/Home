@@ -37,6 +37,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.logging.Logger;
@@ -53,16 +54,7 @@ import javax.imageio.stream.ImageOutputStream;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.math.NumberUtils;
-import org.apache.ibatis.datasource.pooled.PooledDataSource;
-import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.session.Configuration;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
-import com.cq.home.bean.Msg;
-import com.cq.home.dao.MsgDao;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -269,56 +261,11 @@ public class TestDemo <T>{
 	}
 	
 	
-	/**
-	 * @param args
-	 */
-	public static void main_006(String[] args) {
-		PooledDataSource dataSource = new PooledDataSource();
-		dataSource.setDriver("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/ojh?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
-		dataSource.setUsername("ojh");
-		dataSource.setPassword("123456");
-		Environment environment = new Environment("development", new JdbcTransactionFactory(), dataSource);
-		Configuration configuration = new Configuration();
-		configuration.setEnvironment(environment);
-		configuration.addMapper(MsgDao.class);
-		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-		SqlSessionFactory sqlSessionFactory = builder.build(configuration);
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try{
-			MsgDao msgDao = sqlSession.getMapper(MsgDao.class);
-			Msg msg = msgDao.findMsg(65L);
-			System.out.println(msg);
-		}finally{
-			sqlSession.close();
-		}
-		
-	}
-	
 	
 	/**
 	 * @param args
 	 */
-	public static void main_007(String[] args) {
-		
-		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-		SqlSessionFactory sqlSessionFactory = builder.build(TestDemo.class.getResourceAsStream("/mybatis-config.xml"));
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try{
-			MsgDao msgDao = sqlSession.getMapper(MsgDao.class);
-			System.out.println(msgDao.findMsg(65L));
-//			System.out.println(msgDao.queryAll());
-		}finally{
-			sqlSession.close();
-		}
-		
-	}
-	
-	
-	/**
-	 * @param args
-	 */
-	public static void main__008(String[] args) throws Exception{
+	public static void main_006(String[] args) throws Exception{
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
 //		objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
@@ -367,7 +314,7 @@ public class TestDemo <T>{
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main_007(String[] args) {
 		Integer a = 128;
 		BigDecimal dd = new BigDecimal("128.01");
 		double b = dd.doubleValue();
@@ -390,6 +337,7 @@ public class TestDemo <T>{
 		
 		System.out.println(NumberUtils.toDouble("234.2d"));
 	}
+	
 	
 	
 }

@@ -12,21 +12,36 @@ public class User extends BaseEntity{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private String userName;
+	
+	/**
+	 * 用户类别
+	 * @author OJH
+	 *
+	 */
+	public enum Type{
+		normal,
+		advanced
+	}
+	
+	
+	private String name;
 	
 	private String password;
 	
-	private String image;
+	private String phone;
 	
-	private String bgImage;
+	private Integer age;
+	
+	private Type type;
+	
+	private String detail;
 
-	public String getUserName() {
-		return userName;
+	public String getName() {
+		return name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
@@ -37,23 +52,37 @@ public class User extends BaseEntity{
 		this.password = password;
 	}
 
-	public String getImage() {
-		return image;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
-	public String getBgImage() {
-		return bgImage;
+	public Integer getAge() {
+		return age;
 	}
 
-	public void setBgImage(String bgImage) {
-		this.bgImage = bgImage;
+	public void setAge(Integer age) {
+		this.age = age;
 	}
-	
 
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 	
 	
 	

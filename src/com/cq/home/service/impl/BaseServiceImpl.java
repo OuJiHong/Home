@@ -1,7 +1,8 @@
 package com.cq.home.service.impl;
 
 import java.util.List;
-import java.util.Map;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cq.home.bean.core.Pageable;
 import com.cq.home.dao.BaseDao;
@@ -15,6 +16,7 @@ import com.github.pagehelper.PageInfo;
  * @author OJH
  *
  */
+@Transactional
 public abstract class BaseServiceImpl<T> implements BaseService<T>{
 	
 	/**

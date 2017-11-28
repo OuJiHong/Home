@@ -3,10 +3,15 @@
 <configuration>
 
 	<typeAliases>
-	<!--  在没有注解的情况下，会使用 Bean 的首字母小写的非限定类名来作为它的别名 -->
+		<!--  在没有注解的情况下，会使用 Bean 的首字母小写的非限定类名来作为它的别名 -->
 		<package name="com.cq.home.bean"/>
 	</typeAliases>
 
+	<typeHandlers>
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.cq.home.bean.User$Type" />
+	</typeHandlers>
+	
+	
 	<plugins>
 		<plugin interceptor="com.github.pagehelper.PageInterceptor">
 			<property name="helperDialect" value="mysql"/>
@@ -14,7 +19,6 @@
 	</plugins>
 	
 	<mappers>
-		<mapper resource="mapper/msg.xml"/>
 		<mapper resource="mapper/user.xml"/>
 	</mappers>
 	
