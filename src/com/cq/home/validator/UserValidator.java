@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 import com.cq.home.bean.User;
 
 /**
- * 自定义用户验证
+ * 自定义敏感词验证
  * @author OJH
  *
  */

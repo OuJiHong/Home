@@ -1,5 +1,11 @@
 package com.cq.home.bean;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.cq.home.validator.annotation.LimitKeyword;
+
 /**
  * 用户类，测试用的
  * @author OJH
@@ -23,7 +29,6 @@ public class User extends BaseEntity{
 		advanced
 	}
 	
-	
 	private String name;
 	
 	private String password;
@@ -36,6 +41,8 @@ public class User extends BaseEntity{
 	
 	private String detail;
 
+	@NotEmpty
+	@LimitKeyword
 	public String getName() {
 		return name;
 	}
@@ -44,6 +51,7 @@ public class User extends BaseEntity{
 		this.name = name;
 	}
 
+	@NotEmpty
 	public String getPassword() {
 		return password;
 	}
@@ -52,6 +60,7 @@ public class User extends BaseEntity{
 		this.password = password;
 	}
 
+	@NotEmpty
 	public String getPhone() {
 		return phone;
 	}
@@ -68,6 +77,7 @@ public class User extends BaseEntity{
 		this.age = age;
 	}
 
+	@NotNull
 	public Type getType() {
 		return type;
 	}

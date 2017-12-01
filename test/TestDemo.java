@@ -53,6 +53,7 @@ import javax.imageio.stream.ImageOutputStream;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -338,6 +339,14 @@ public class TestDemo <T>{
 		System.out.println(NumberUtils.toDouble("234.2d"));
 	}
 	
+	
+	public static void main(String[] args) {
+		String password = "79747D21D9F0B72066DAF1341C209D05B30D1E948E0C71D81607E753E456F1DC2FD95DCCD89C3BA3A0CD0FB1BE4128CA";
+		String enPwd = DigestUtils.md5Hex("ojh123456");
+		System.out.println(password);
+		System.out.println(enPwd);
+		
+	}
 	
 	
 }

@@ -69,14 +69,4 @@ public class UserController extends BaseController{
 	}
 	
 	
-	@InitBinder
-	protected void initUserValidator(WebDataBinder webDataBinder){
-		//局部绑定，每个请求都会调用一个，不兼容的类型会报错
-		UserValidator userValidator = new UserValidator();
-		if(webDataBinder.getTarget() != null && userValidator.supports(webDataBinder.getTarget().getClass())){
-			webDataBinder.setValidator(userValidator);
-		}
-		
-	}
-	
 }
