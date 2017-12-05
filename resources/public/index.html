@@ -17,7 +17,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#" >我的网站</a>
@@ -26,8 +26,16 @@
                     <li class="active">
                         <a href="#">首页</a>
                     </li>
-                    <li>
-                        <a href="#">文章分类</a>
+                    <li class="dropdown">
+                        <a href="#"  data-toggle="dropdown" >文章分类<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                               <a href="#"> 天文</a>
+                            </li>
+                            <li>
+                                <a href="#">地理</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#">技术要点</a>
@@ -47,7 +55,7 @@
     <section class="container">
         <div class="jumbotron">
             <div class="container">
-                <h1>入门基本法</h1>
+                <h1>如何学习？</h1>
                 <p>
                     快速阅读，不求甚解。在极短的时间内容了解技术的概要和关键点，在实践中验证自己所思所想，只有通过自己的验证才能证明代码的可行性！
                     所以测试是一个必要的环节，快速测试能让我们更快地接受新知识。
