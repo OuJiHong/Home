@@ -3,3 +3,8 @@ body{
     background:url('../images/universe.jpg') no-repeat top center;
     background-size:100% auto;
 }
+
+
+.article{
+    padding:6px;
+}

@@ -1,0 +1,136 @@
+@CHARSET "UTF-8";
+
+.multiple-select{
+	position:relative;
+	display:block;
+	padding:2px;
+	overflow:hidden;
+	*zoom:1;
+	white-space:nowrap;
+}
+
+.multiple-select:after{
+	content:"";
+	heigth:0px;
+	display:block;
+	clear:both;
+}
+
+.multipleSelect-range{
+	position:relative;
+	min-width:80px;
+}
+
+.multiple-select-original{
+	display:inline-block;
+	vertical-align:top;
+	border:solid 1px #b2cedf;
+	height:100%;
+}
+
+.multiple-select-result{
+	display:inline-block;
+	vertical-align:top;
+	border:solid 1px #b2cedf;
+	height:100%;
+}
+
+
+.multiple-select-operation{
+	position:relative;
+	display:inline-block;
+	vertical-align:top;
+	border:solid 1px transparent;
+	height:100%;	
+	text-align:center;
+	
+}
+
+.multiple-select-operationTool{
+	position:absolute;
+	height:60px;
+	width:80px;
+	top:0px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	margin:auto;
+	overflow:hidden;
+}
+
+.multiple-select-operationTool a.button{
+	margin-right:0px;
+	margin-bottom:4px;
+}
+
+.multiple-select-search{
+	display:block;
+	width:100%;
+	height:34px;
+	line-height:34px;
+	padding-top:4px;
+	border-bottom:solid 1px #ccc;
+	background-color:#efefef;
+	text-align:center;
+}
+
+.multiple-select-searchInput{
+	display:inline-block;
+	height:24px;
+	line-height:24px;
+	width:80%;
+	padding:0px 4px;
+}
+
+.multiple-select-itemWrapper{
+	height:100%;
+	overflow:auto;
+}
+
+.multiple-select-item{
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	line-height:34px;
+	border-bottom:solid 1px #dde9f5;
+	padding:0px 8px;
+	cursor:pointer;
+}
+
+.multiple-select-item.selected{
+	background-color:#e8f1fb;
+}
+
+.multiple-select-item.no-match{
+	display:none;
+}
+
+.multiple-drag-select{
+	pointer-events:none;
+	position:absolute;
+	z-index:999;
+	border:dashed 1px #666;
+	background-color:rgba(200,200,200,0.4);
+	cursor:default;
+}
+
+.multiple-select-hidden{
+	display:block !important;
+	border: 0!important;
+    clip: rect(0 0 0 0)!important;
+    height: 1px!important;
+    margin: -1px!important;
+    overflow: hidden!important;
+    padding: 0!important;
+    position: absolute!important;
+    width: 1px!important;
+    
+}
+	
+.multiple-loading{
+	line-height:28px;
+	font-size:12px;
+	color:#8c8c8c;
+	text-align:center;
+}
+
