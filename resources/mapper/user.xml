@@ -19,6 +19,14 @@
 		select * from user 
 	</select>
 	
+	<select id="find" resultMap="userResult">
+		select * from user where id = #{userId}
+	</select>
+	
+	<select id="findByName" resultMap="userResult">
+		select * from user where name = #{userName}
+	</select>
+	 
 	<insert id="add" >
 		insert into user(name,password,phone,age,type,detail,create_date)
 		values (#{name},#{password}, #{phone}, #{age}, #{type}, #{detail}, now() )

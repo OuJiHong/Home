@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author OJH
  *
  */
-public class JsonUtils {
+public abstract class JsonUtils {
 	
 	private static final Log log = LogFactory.getLog(JsonUtils.class);
 	

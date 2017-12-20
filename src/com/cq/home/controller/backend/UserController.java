@@ -3,9 +3,8 @@ package com.cq.home.controller.backend;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cq.home.bean.User;
@@ -13,16 +12,19 @@ import com.cq.home.bean.core.Message;
 import com.cq.home.bean.core.Pageable;
 import com.cq.home.controller.BaseController;
 import com.cq.home.service.UserService;
-import com.cq.home.validator.UserValidator;
 import com.github.pagehelper.PageInfo;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * 用户控制器
  * @author OJH
  *
  */
+@Api(tags="用户信息管理")
 @RestController
-@RequestMapping("/backend/user")
+@RequestMapping(value="/backend/user", produces="application/json")
 public class UserController extends BaseController{
 	
 	
@@ -32,8 +34,9 @@ public class UserController extends BaseController{
 	/**
 	 * @return
 	 */
-	@RequestMapping("/list")
-	public PageInfo<User> findPage(Pageable pageable){
+	@ApiOperation("查询用户信息列表")
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public PageInfo<User> list(Pageable pageable){
 		return userService.findPage(pageable);
 	}
 	
@@ -42,7 +45,8 @@ public class UserController extends BaseController{
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping("/add")
+	@ApiOperation("添加用户信息")
+	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public Message add(@Valid User user) throws Exception{
 		userService.add(user);
 		return Message.success("添加成功");
@@ -53,7 +57,8 @@ public class UserController extends BaseController{
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping("/update")
+	@ApiOperation("修改用户信息")
+	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public Message update(User user) throws Exception{
 		userService.update(user);
 		return Message.success("修改成功");
@@ -63,7 +68,8 @@ public class UserController extends BaseController{
 	 * 获取总数量
 	 * @return
 	 */
-	@RequestMapping("/count")
+	@ApiOperation("查询用户总数量")
+	@RequestMapping(value="/count", method=RequestMethod.GET)
 	public Long count(){
 		return userService.count(null);
 	}

@@ -26,6 +26,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
 	@Override
 	public void add(User user) throws BizException{
+		User existUser = userDao.findByName(user.getName());
+		if(existUser != null){
+			throw new BizException("user.existSame.error");
+		}
+		
 		int effective = userDao.add(user);
 		if(effective != 1){
 			throw new BizException("user.add.error");
@@ -34,6 +39,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
 	@Override
 	public void update(User user) throws BizException {
+		if(user.getId() == null){
+			throw new BizException("model.id.required");
+		}
 		int effective = userDao.update(user);
 		if(effective != 1){
 			throw new BizException("user.update.error");

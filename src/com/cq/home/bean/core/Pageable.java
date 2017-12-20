@@ -4,11 +4,15 @@ import java.io.Serializable;
 
 import org.apache.commons.lang.math.NumberUtils;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 分页对象
  * @author OJH
  *
  */
+@ApiModel(value="分页对象")
 public class Pageable implements Serializable{
 
 	/**
@@ -19,13 +23,15 @@ public class Pageable implements Serializable{
 	/**
 	 * 分页插件约定参数
 	 */
-	private int pageSize = 10;
+	@ApiModelProperty("分页大小")
+	private Integer pageSize = 10;
 	
 	/**
 	 * 分页插件约定参数
 	 * 
 	 */
-	private int pageNum = 1;
+	@ApiModelProperty("当前页码")
+	private Integer pageNum = 1;
 
 	public int getPageSize() {
 		return pageSize;

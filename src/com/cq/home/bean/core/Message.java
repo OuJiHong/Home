@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import io.swagger.annotations.ApiModel;
+
 /**
  * 统一消息数据交互
  * @author OJH
  *
  */
+@ApiModel(value="统一消息响应对象")
 public class Message implements Serializable{
 
 	/**
@@ -78,7 +81,7 @@ public class Message implements Serializable{
 	 * @param key
 	 * @param value
 	 */
-	public Message addData(String key, Object value){
+	public Message setAttribute(String key, Object value){
 		getData().put(key, value);
 		return this;
 	}

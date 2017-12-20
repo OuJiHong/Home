@@ -1,16 +1,21 @@
 package com.cq.home.bean;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.cq.home.validator.annotation.LimitKeyword;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 用户类，测试用的
  * @author OJH
  *
  */
+@ApiModel(value="用户信息模型")
 public class User extends BaseEntity{
 
 	
@@ -29,16 +34,22 @@ public class User extends BaseEntity{
 		advanced
 	}
 	
+	@ApiModelProperty(value="用户名",required=true)
 	private String name;
 	
+	@ApiModelProperty(value="用户密码",required=true)
 	private String password;
 	
+	@ApiModelProperty(value="用户手机号",required=true)
 	private String phone;
 	
+	@ApiModelProperty(value="用户年龄")
 	private Integer age;
 	
+	@ApiModelProperty(value="用户类型",required=true)
 	private Type type;
 	
+	@ApiModelProperty(value="用户详情")
 	private String detail;
 
 	@NotEmpty
@@ -61,6 +72,7 @@ public class User extends BaseEntity{
 	}
 
 	@NotEmpty
+	@Size(max=11)
 	public String getPhone() {
 		return phone;
 	}

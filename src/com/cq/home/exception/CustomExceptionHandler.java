@@ -1,5 +1,7 @@
 package com.cq.home.exception;
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,21 +30,23 @@ public class CustomExceptionHandler{
 	public ModelAndView customeHandleException(Exception ex, HttpServletRequest request, HttpServletResponse response){
 		ModelAndView modelAndView = null;
 		
-		Message message  = Message.failed(ex.getMessage());
+		String errorCode = UUID.randomUUID().toString();
+		Message message  = Message.failed("系统内部错误，请联系管理员" + "("+errorCode+")");
 		if(ex instanceof BindException){
 			logger.error("数据校验异常:" + ex.getMessage());
 			BindException bindException = (BindException)ex;
 			if(bindException.getFieldError() != null){
 				FieldError fieldError = bindException.getFieldError();
-				message.setMsg(fieldError.getField() + fieldError.getDefaultMessage());
+				message.setMsg(fieldError.getField() + "字段校验失败  - " + fieldError.getDefaultMessage());
 			}else{
-				message.setMsg(bindException.getGlobalError().getDefaultMessage());
+				message.setMsg("数据校验失败  - " + bindException.getGlobalError().getDefaultMessage());
 			}
 		}else if(ex instanceof BizException){
 			BizException bizException = (BizException)ex;
+			message.setMsg(bizException.getMessage());
 			logger.error("业务逻辑异常:" + bizException.getCode() +  "(" + bizException.getMessage() + ")");
 		}else{
-			logger.error("系统内部错误", ex);
+			logger.error("系统内部错误 - " + errorCode, ex);
 		}
 		
 		

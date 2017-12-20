@@ -3,6 +3,8 @@ package com.cq.home.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 抽象的基础实体
  * @author OJH
@@ -15,6 +17,7 @@ public abstract class BaseEntity implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@ApiModelProperty(value="对象唯一标识")
 	private Long  id;
 	private Date createDate;
 	private Date modifyDate;

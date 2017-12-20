@@ -3,11 +3,14 @@ package com.cq.home.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.swagger.annotations.Api;
+
 /**
  * 通用错误跳转
  * @author OJH
  *
  */
+@Api(tags="错误页面管理")
 @Controller
 @RequestMapping("/")
 public class ErrorController extends BaseController{
