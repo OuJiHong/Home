@@ -5,8 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
-import com.cq.home.config.editor.CustomStringEditor;
-import com.cq.home.util.CustomDateFormatter;
+import com.cq.home.config.convert.CustomDateFormatter;
+import com.cq.home.config.convert.CustomStringEditor;
 
 /**
  * 基础控制器

@@ -1,4 +1,4 @@
-package com.cq.home.util;
+package com.cq.home.config.convert;
 
 import java.text.ParseException;
 import java.util.Date;
