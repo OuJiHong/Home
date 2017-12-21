@@ -40,16 +40,16 @@
 					name = #{name},
 				</if>
 				<if test="phone != null">
-					name = #{phone}
+					name = #{phone},
 				</if>
 				<if test="age != null">
-					age = #{age}
+					age = #{age},
 				</if>
 				<if test="type != null">
-					type = #{type}
+					type = #{type},
 				</if>
 				<if test="detail != null">
-					detail = #{detail}
+					detail = #{detail},
 				</if>
 			</set>
 			where id = #{id}
