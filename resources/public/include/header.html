@@ -1,0 +1,50 @@
+
+<header>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html" >我的网站</a>
+            </div>
+            <ul class="nav navbar-nav" id="headerNavUl">
+                <li>
+                    <a href="{{base}}/index.html">首页</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#"  data-toggle="dropdown" >文章分类<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                           <a href="#"> 天文</a>
+                        </li>
+                        <li>
+                            <a href="#">地理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">技术要点</a>
+                </li>
+                <li>
+                    <a href="{{base}}/manager/manager.html">关于我们</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </nav>
+
+</header>
+
+<script type="text/javascript">
+	$(function(){
+		var pathname = location.pathname;
+		//刚好首页链接在第一个，当pathname为默认/时，会选中第一个
+		$("#headerNavUl").find("a").each(function(index, anchor){
+			if(anchor.href.indexOf(pathname) != -1){
+				$(anchor).parent("li").addClass("active");
+				return false;
+			}
+		});
+		
+	});
+	
+</script>
