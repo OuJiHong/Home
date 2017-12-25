@@ -108,17 +108,23 @@
      *
      */
     util.include = function(url, noUseTemplate){
+    	if(url == null){
+    		return;
+    	}
+    	//基本数据
+		var data = {
+				basePath:window.basePath,
+				base:window.basePath
+			};
+		
+    	url = template.render(url, data);
+    	
         $.ajax({
             url:url,
             async:false,
             success:function(content){
             	if(!noUseTemplate){
             		//默认使用用模版渲染
-            		var data = {
-            			basePath:window.basePath,
-            			base:window.basePath
-            		};
-            		
             		content = template.render(content, data);
             	}
             	
