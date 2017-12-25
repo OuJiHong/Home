@@ -32,10 +32,10 @@
 	}
 	
 	//以bootstrap为基础，扩展样式
-	write(basePath + "/node_modules/bootstrap/dist/css/bootstrap.css");
+	write(basePath + "/lib/bootstrap-3.3.7-dist/css/bootstrap.css");
 	write(basePath + "/lib/css/common.css");
-	write(basePath + "/node_modules/jquery/dist/jquery.js");
-	write(basePath + "/node_modules/bootstrap/dist/js/bootstrap.js");
+	write(basePath + "/lib/js/jquery-1.9.1.min.js");
+	write(basePath + "/lib/bootstrap-3.3.7-dist/js/bootstrap.js");
 	write(basePath + "/lib/js/template-web.js");
 	write(basePath + "/lib/js/util.js");
 	
