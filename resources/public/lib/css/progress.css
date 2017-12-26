@@ -62,7 +62,9 @@
 	border-right-color:transparent;
 	border-bottom-color:transparent;
 	border-radius:50%;
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
+	-webkit-transition:transform 300ms;
 	transition:transform 300ms;
 }
 
@@ -90,7 +92,9 @@
 	border-left-color:transparent;
 	border-bottom-color:transparent;
 	border-radius:50%;
-	transform:rotate(-135deg);
+	-webkit-transform:rotate(-135deg);
+    transform:rotate(-135deg);
+	-webkit-transition:-webkit-transform 300ms;
 	transition:transform 300ms;
 }
 
@@ -101,19 +105,23 @@
 	content:attr(data-value) "%";
 }
 .circle-progress-bar[data-value] .circle-progress-right:before{
-	transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value] .circle-progress-left:before{
-	transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
+    transform:rotate(-45deg);
 }
 
 /****first****/
 .circle-progress-bar[data-value="1"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+    -webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 
 .circle-progress-bar[data-value="1"] .circle-progress-right:before{
-	transform:rotate(-131.4deg);
+    -webkit-transform:rotate(-131.4deg);
+    transform:rotate(-131.4deg);
 }
 
 .circle-progress-bar[data-value="1"]:after{
@@ -121,10 +129,12 @@
 }
 
 .circle-progress-bar[data-value="2"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+    -webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="2"] .circle-progress-right:before{
-	transform:rotate(-127.8deg);
+    -webkit-transform:rotate(-127.8deg);
+    transform:rotate(-127.8deg);
 }
 .circle-progress-bar[data-value="2"]:after{
 	content:"2%";
@@ -132,180 +142,216 @@
 
 
 .circle-progress-bar[data-value="3"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+    -webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="3"] .circle-progress-right:before{
-	transform:rotate(-124.2deg);
+    -webkit-transform:rotate(-124.2deg);
+    transform:rotate(-124.2deg);
 }
 .circle-progress-bar[data-value="3"]:after{
 	content:"3%";
 }
 
 .circle-progress-bar[data-value="4"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="4"] .circle-progress-right:before{
-	transform:rotate(-120.6deg);
+	-webkit-transform:rotate(-120.6deg);
+    transform:rotate(-120.6deg);
 }
 .circle-progress-bar[data-value="4"]:after{
 	content:"4%";
 }
 
 .circle-progress-bar[data-value="5"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="5"] .circle-progress-right:before{
-	transform:rotate(-117deg);
+	-webkit-transform:rotate(-117deg);
+    transform:rotate(-117deg);
 }
 .circle-progress-bar[data-value="5"]:after{
 	content:"5%";
 }
 
 .circle-progress-bar[data-value="6"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="6"] .circle-progress-right:before{
-	transform:rotate(-113.4deg);
+	-webkit-transform:rotate(-113.4deg);
+    transform:rotate(-113.4deg);
 }
 .circle-progress-bar[data-value="6"]:after{
 	content:"6%";
 }
 
 .circle-progress-bar[data-value="7"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="7"] .circle-progress-right:before{
-	transform:rotate(-109.8deg);
+	-webkit-transform:rotate(-109.8deg);
+    transform:rotate(-109.8deg);
 }
 .circle-progress-bar[data-value="7"]:after{
 	content:"7%";
 }
 
 .circle-progress-bar[data-value="8"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="8"] .circle-progress-right:before{
-	transform:rotate(-106.2deg);
+	-webkit-transform:rotate(-106.2deg);
+    transform:rotate(-106.2deg);
 }
 .circle-progress-bar[data-value="8"]:after{
 	content:"8%";
 }
 
 .circle-progress-bar[data-value="9"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="9"] .circle-progress-right:before{
-	transform:rotate(-102.6deg);
+	-webkit-transform:rotate(-102.6deg);
+    transform:rotate(-102.6deg);
 }
 .circle-progress-bar[data-value="9"]:after{
 	content:"9%";
 }
 
 .circle-progress-bar[data-value="10"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="10"] .circle-progress-right:before{
-	transform:rotate(-99deg);
+	-webkit-transform:rotate(-99deg);
+    transform:rotate(-99deg);
 }
 .circle-progress-bar[data-value="10"]:after{
 	content:"10%";
 }
 
 .circle-progress-bar[data-value="11"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="11"] .circle-progress-right:before{
-	transform:rotate(-95.4deg);
+	-webkit-transform:rotate(-95.4deg);
+    transform:rotate(-95.4deg);
 }
 .circle-progress-bar[data-value="11"]:after{
 	content:"11%";
 }
 
 .circle-progress-bar[data-value="12"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="12"] .circle-progress-right:before{
-	transform:rotate(-91.8deg);
+	-webkit-transform:rotate(-91.8deg);
+    transform:rotate(-91.8deg);
 }
 .circle-progress-bar[data-value="12"]:after{
 	content:"12%";
 }
 
 .circle-progress-bar[data-value="13"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="13"] .circle-progress-right:before{
-	transform:rotate(-88.2deg);
+	-webkit-transform:rotate(-88.2deg);
+    transform:rotate(-88.2deg);
 }
 .circle-progress-bar[data-value="13"]:after{
 	content:"13%";
 }
 
 .circle-progress-bar[data-value="14"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="14"] .circle-progress-right:before{
-	transform:rotate(-84.6deg);
+	-webkit-transform:rotate(-84.6deg);
+    transform:rotate(-84.6deg);
 }
 .circle-progress-bar[data-value="14"]:after{
 	content:"14%";
 }
 
 .circle-progress-bar[data-value="15"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="15"] .circle-progress-right:before{
-	transform:rotate(-81deg);
+	-webkit-transform:rotate(-81deg);
+    transform:rotate(-81deg);
 }
 .circle-progress-bar[data-value="15"]:after{
 	content:"15%";
 }
 
 .circle-progress-bar[data-value="16"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="16"] .circle-progress-right:before{
-	transform:rotate(-77.4deg);
+	-webkit-transform:rotate(-77.4deg);
+    transform:rotate(-77.4deg);
 }
 .circle-progress-bar[data-value="16"]:after{
 	content:"16%";
 }
 
 .circle-progress-bar[data-value="17"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="17"] .circle-progress-right:before{
-	transform:rotate(-73.8deg);
+	-webkit-transform:rotate(-73.8deg);
+    transform:rotate(-73.8deg);
 }
 .circle-progress-bar[data-value="17"]:after{
 	content:"17%";
 }
 
 .circle-progress-bar[data-value="18"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="18"] .circle-progress-right:before{
-	transform:rotate(-70.2deg);
+	-webkit-transform:rotate(-70.2deg);
+    transform:rotate(-70.2deg);
 }
 .circle-progress-bar[data-value="18"]:after{
 	content:"18%";
 }
 
 .circle-progress-bar[data-value="19"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="19"] .circle-progress-right:before{
-	transform:rotate(-66.6deg);
+	-webkit-transform:rotate(-66.6deg);
+    transform:rotate(-66.6deg);
 }
 .circle-progress-bar[data-value="19"]:after{
 	content:"19%";
 }
 
 .circle-progress-bar[data-value="20"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="20"] .circle-progress-right:before{
-	transform:rotate(-63deg);
+	-webkit-transform:rotate(-63deg);
+    transform:rotate(-63deg);
 }
 .circle-progress-bar[data-value="20"]:after{
 	content:"20%";
@@ -313,300 +359,360 @@
 
 
 .circle-progress-bar[data-value="21"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="21"] .circle-progress-right:before{
-	transform:rotate(-59.4deg);
+	-webkit-transform:rotate(-59.4deg);
+    transform:rotate(-59.4deg);
 }
 .circle-progress-bar[data-value="21"]:after{
 	content:"21%";
 }
 
 .circle-progress-bar[data-value="22"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="22"] .circle-progress-right:before{
-	transform:rotate(-55.8deg);
+	-webkit-transform:rotate(-55.8deg);
+    transform:rotate(-55.8deg);
 }
 .circle-progress-bar[data-value="22"]:after{
 	content:"22%";
 }
 
 .circle-progress-bar[data-value="23"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="23"] .circle-progress-right:before{
-	transform:rotate(-52.2deg);
+	-webkit-transform:rotate(-52.2deg);
+    transform:rotate(-52.2deg);
 }
 .circle-progress-bar[data-value="23"]:after{
 	content:"23%";
 }
 
 .circle-progress-bar[data-value="24"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="24"] .circle-progress-right:before{
-	transform:rotate(-48.6deg);
+	-webkit-transform:rotate(-48.6deg);
+    transform:rotate(-48.6deg);
 }
 .circle-progress-bar[data-value="24"]:after{
 	content:"24%";
 }
 
 .circle-progress-bar[data-value="25"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="25"] .circle-progress-right:before{
-	transform:rotate(-45deg);
+	-webkit-transform:rotate(-45deg);
+    transform:rotate(-45deg);
 }
 .circle-progress-bar[data-value="25"]:after{
 	content:"25%";
 }
 
 .circle-progress-bar[data-value="26"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="26"] .circle-progress-right:before{
-	transform:rotate(-41.4deg);
+	-webkit-transform:rotate(-41.4deg);
+    transform:rotate(-41.4deg);
 }
 .circle-progress-bar[data-value="26"]:after{
 	content:"26%";
 }
 
 .circle-progress-bar[data-value="27"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="27"] .circle-progress-right:before{
-	transform:rotate(-37.8deg);
+	-webkit-transform:rotate(-37.8deg);
+    transform:rotate(-37.8deg);
 }
 .circle-progress-bar[data-value="27"]:after{
 	content:"27%";
 }
 
 .circle-progress-bar[data-value="28"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="28"] .circle-progress-right:before{
-	transform:rotate(-34.2deg);
+	-webkit-transform:rotate(-34.2deg);
+    transform:rotate(-34.2deg);
 }
 .circle-progress-bar[data-value="28"]:after{
 	content:"28%";
 }
 
 .circle-progress-bar[data-value="29"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="29"] .circle-progress-right:before{
-	transform:rotate(-30.6deg);
+	-webkit-transform:rotate(-30.6deg);
+    transform:rotate(-30.6deg);
 }
 .circle-progress-bar[data-value="29"]:after{
 	content:"29%";
 }
 
 .circle-progress-bar[data-value="30"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="30"] .circle-progress-right:before{
-	transform:rotate(-27deg);
+	-webkit-transform:rotate(-27deg);
+    transform:rotate(-27deg);
 }
 .circle-progress-bar[data-value="30"]:after{
 	content:"30%";
 }
 
 .circle-progress-bar[data-value="31"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="31"] .circle-progress-right:before{
-	transform:rotate(-23.4deg);
+	-webkit-transform:rotate(-23.4deg);
+    transform:rotate(-23.4deg);
 }
 .circle-progress-bar[data-value="31"]:after{
 	content:"31%";
 }
 
 .circle-progress-bar[data-value="32"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="32"] .circle-progress-right:before{
-	transform:rotate(-19.8deg);
+	-webkit-transform:rotate(-19.8deg);
+    transform:rotate(-19.8deg);
 }
 .circle-progress-bar[data-value="32"]:after{
 	content:"32%";
 }
 
 .circle-progress-bar[data-value="33"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="33"] .circle-progress-right:before{
-	transform:rotate(-16.2deg);
+	-webkit-transform:rotate(-16.2deg);
+    transform:rotate(-16.2deg);
 }
 .circle-progress-bar[data-value="33"]:after{
 	content:"33%";
 }
 
 .circle-progress-bar[data-value="34"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="34"] .circle-progress-right:before{
-	transform:rotate(-12.6deg);
+	-webkit-transform:rotate(-12.6deg);
+    transform:rotate(-12.6deg);
 }
 .circle-progress-bar[data-value="34"]:after{
 	content:"34%";
 }
 
 .circle-progress-bar[data-value="35"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="35"] .circle-progress-right:before{
-	transform:rotate(-9deg);
+	-webkit-transform:rotate(-9deg);
+    transform:rotate(-9deg);
 }
 .circle-progress-bar[data-value="35"]:after{
 	content:"35%";
 }
 
 .circle-progress-bar[data-value="36"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="36"] .circle-progress-right:before{
-	transform:rotate(-5.4deg);
+	-webkit-transform:rotate(-5.4deg);
+    transform:rotate(-5.4deg);
 }
 .circle-progress-bar[data-value="36"]:after{
 	content:"36%";
 }
 
 .circle-progress-bar[data-value="37"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="37"] .circle-progress-right:before{
-	transform:rotate(-1.8deg);
+	-webkit-transform:rotate(-1.8deg);
+    transform:rotate(-1.8deg);
 }
 .circle-progress-bar[data-value="37"]:after{
 	content:"37%";
 }
 
 .circle-progress-bar[data-value="38"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="38"] .circle-progress-right:before{
-	transform:rotate(1.8deg);
+	-webkit-transform:rotate(1.8deg);
+    transform:rotate(1.8deg);
 }
 .circle-progress-bar[data-value="38"]:after{
 	content:"38%";
 }
 
 .circle-progress-bar[data-value="39"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="39"] .circle-progress-right:before{
-	transform:rotate(5.4deg);
+	-webkit-transform:rotate(5.4deg);
+    transform:rotate(5.4deg);
 }
 .circle-progress-bar[data-value="39"]:after{
 	content:"39%";
 }
 
 .circle-progress-bar[data-value="40"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="40"] .circle-progress-right:before{
-	transform:rotate(9deg);
+	-webkit-transform:rotate(9deg);
+    transform:rotate(9deg);
 }
 .circle-progress-bar[data-value="40"]:after{
 	content:"40%";
 }
 
 .circle-progress-bar[data-value="41"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="41"] .circle-progress-right:before{
-	transform:rotate(12.6deg);
+	-webkit-transform:rotate(12.6deg);
+    transform:rotate(12.6deg);
 }
 .circle-progress-bar[data-value="41"]:after{
 	content:"41%";
 }
 
 .circle-progress-bar[data-value="42"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="42"] .circle-progress-right:before{
-	transform:rotate(16.2deg);
+	-webkit-transform:rotate(16.2deg);
+    transform:rotate(16.2deg);
 }
 .circle-progress-bar[data-value="42"]:after{
 	content:"42%";
 }
 
 .circle-progress-bar[data-value="43"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="43"] .circle-progress-right:before{
-	transform:rotate(19.8deg);
+	-webkit-transform:rotate(19.8deg);
+    transform:rotate(19.8deg);
 }
 .circle-progress-bar[data-value="43"]:after{
 	content:"43%";
 }
 
 .circle-progress-bar[data-value="44"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="44"] .circle-progress-right:before{
-	transform:rotate(23.4deg);
+	-webkit-transform:rotate(23.4deg);
+    transform:rotate(23.4deg);
 }
 .circle-progress-bar[data-value="44"]:after{
 	content:"44%";
 }
 
 .circle-progress-bar[data-value="45"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="45"] .circle-progress-right:before{
-	transform:rotate(27deg);
+	-webkit-transform:rotate(27deg);
+    transform:rotate(27deg);
 }
 .circle-progress-bar[data-value="45"]:after{
 	content:"45%";
 }
 
 .circle-progress-bar[data-value="46"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="46"] .circle-progress-right:before{
-	transform:rotate(30.6deg);
+	-webkit-transform:rotate(30.6deg);
+    transform:rotate(30.6deg);
 }
 .circle-progress-bar[data-value="46"]:after{
 	content:"46%";
 }
 
 .circle-progress-bar[data-value="47"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="47"] .circle-progress-right:before{
-	transform:rotate(34.2deg);
+	-webkit-transform:rotate(34.2deg);
+    transform:rotate(34.2deg);
 }
 .circle-progress-bar[data-value="47"]:after{
 	content:"47%";
 }
 
 .circle-progress-bar[data-value="48"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="48"] .circle-progress-right:before{
-	transform:rotate(37.8deg);
+	-webkit-transform:rotate(37.8deg);
+    transform:rotate(37.8deg);
 }
 .circle-progress-bar[data-value="48"]:after{
 	content:"48%";
 }
 
 .circle-progress-bar[data-value="49"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="49"] .circle-progress-right:before{
-	transform:rotate(41.4deg);
+	-webkit-transform:rotate(41.4deg);
+    transform:rotate(41.4deg);
 }
 .circle-progress-bar[data-value="49"]:after{
 	content:"49%";
 }
 
 .circle-progress-bar[data-value="50"] .circle-progress-left:before{
-	transform:rotate(-225deg);
+	-webkit-transform:rotate(-225deg);
+    transform:rotate(-225deg);
 }
 .circle-progress-bar[data-value="50"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="50"]:after{
 	content:"50%";
@@ -614,451 +720,551 @@
 
 /****next****/
 .circle-progress-bar[data-value="51"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="51"] .circle-progress-left:before{
-	transform:rotate(-221.4deg);
+	-webkit-transform:rotate(-221.4deg);
+    transform:rotate(-221.4deg);
 }
 .circle-progress-bar[data-value="51"]:after{
 	content:"51%";
 }
 .circle-progress-bar[data-value="52"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="52"] .circle-progress-left:before{
-	transform:rotate(-217.8deg);
+	-webkit-transform:rotate(-217.8deg);
+    transform:rotate(-217.8deg);
 }
 .circle-progress-bar[data-value="52"]:after{
 	content:"52%";
 }
 .circle-progress-bar[data-value="53"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="53"] .circle-progress-left:before{
-	transform:rotate(-214.2deg);
+	-webkit-transform:rotate(-214.2deg);
+    transform:rotate(-214.2deg);
 }
 .circle-progress-bar[data-value="53"]:after{
 	content:"53%";
 }
 .circle-progress-bar[data-value="54"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="54"] .circle-progress-left:before{
-	transform:rotate(-210.6deg);
+	-webkit-transform:rotate(-210.6deg);
+    transform:rotate(-210.6deg);
 }
 .circle-progress-bar[data-value="54"]:after{
 	content:"54%";
 }
 .circle-progress-bar[data-value="55"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="55"] .circle-progress-left:before{
-	transform:rotate(-207deg);
+	-webkit-transform:rotate(-207deg);
+    transform:rotate(-207deg);
 }
 .circle-progress-bar[data-value="55"]:after{
 	content:"55%";
 }
 .circle-progress-bar[data-value="56"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="56"] .circle-progress-left:before{
-	transform:rotate(-203.4deg);
+	-webkit-transform:rotate(-203.4deg);
+    transform:rotate(-203.4deg);
 }
 .circle-progress-bar[data-value="56"]:after{
 	content:"56%";
 }
 .circle-progress-bar[data-value="57"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="57"] .circle-progress-left:before{
-	transform:rotate(-199.8deg);
+	-webkit-transform:rotate(-199.8deg);
+    transform:rotate(-199.8deg);
 }
 .circle-progress-bar[data-value="57"]:after{
 	content:"57%";
 }
 .circle-progress-bar[data-value="58"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="58"] .circle-progress-left:before{
-	transform:rotate(-196.2deg);
+	-webkit-transform:rotate(-196.2deg);
+    transform:rotate(-196.2deg);
 }
 .circle-progress-bar[data-value="58"]:after{
 	content:"58%";
 }
 .circle-progress-bar[data-value="59"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="59"] .circle-progress-left:before{
-	transform:rotate(-192.6deg);
+	-webkit-transform:rotate(-192.6deg);
+    transform:rotate(-192.6deg);
 }
 .circle-progress-bar[data-value="59"]:after{
 	content:"59%";
 }
 .circle-progress-bar[data-value="60"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="60"] .circle-progress-left:before{
-	transform:rotate(-189deg);
+	-webkit-transform:rotate(-189deg);
+    transform:rotate(-189deg);
 }
 .circle-progress-bar[data-value="60"]:after{
 	content:"60%";
 }
 .circle-progress-bar[data-value="61"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="61"] .circle-progress-left:before{
-	transform:rotate(-185.4deg);
+	-webkit-transform:rotate(-185.4deg);
+    transform:rotate(-185.4deg);
 }
 .circle-progress-bar[data-value="61"]:after{
 	content:"61%";
 }
 .circle-progress-bar[data-value="62"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="62"] .circle-progress-left:before{
-	transform:rotate(-181.8deg);
+	-webkit-transform:rotate(-181.8deg);
+    transform:rotate(-181.8deg);
 }
 .circle-progress-bar[data-value="62"]:after{
 	content:"62%";
 }
 .circle-progress-bar[data-value="63"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="63"] .circle-progress-left:before{
-	transform:rotate(-178.2deg);
+	-webkit-transform:rotate(-178.2deg);
+    transform:rotate(-178.2deg);
 }
 .circle-progress-bar[data-value="63"]:after{
 	content:"63%";
 }
 .circle-progress-bar[data-value="64"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="64"] .circle-progress-left:before{
-	transform:rotate(-174.6deg);
+	-webkit-transform:rotate(-174.6deg);
+    transform:rotate(-174.6deg);
 }
 .circle-progress-bar[data-value="64"]:after{
 	content:"64%";
 }
 .circle-progress-bar[data-value="65"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="65"] .circle-progress-left:before{
-	transform:rotate(-171deg);
+	-webkit-transform:rotate(-171deg);
+    transform:rotate(-171deg);
 }
 .circle-progress-bar[data-value="65"]:after{
 	content:"65%";
 }
 .circle-progress-bar[data-value="66"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="66"] .circle-progress-left:before{
-	transform:rotate(-167.4deg);
+	-webkit-transform:rotate(-167.4deg);
+    transform:rotate(-167.4deg);
 }
 .circle-progress-bar[data-value="66"]:after{
 	content:"66%";
 }
 .circle-progress-bar[data-value="67"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="67"] .circle-progress-left:before{
-	transform:rotate(-163.8deg);
+	-webkit-transform:rotate(-163.8deg);
+    transform:rotate(-163.8deg);
 }
 .circle-progress-bar[data-value="67"]:after{
 	content:"67%";
 }
 .circle-progress-bar[data-value="68"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="68"] .circle-progress-left:before{
-	transform:rotate(-160.2deg);
+	-webkit-transform:rotate(-160.2deg);
+    transform:rotate(-160.2deg);
 }
 .circle-progress-bar[data-value="68"]:after{
 	content:"68%";
 }
 .circle-progress-bar[data-value="69"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="69"] .circle-progress-left:before{
-	transform:rotate(-156.6deg);
+	-webkit-transform:rotate(-156.6deg);
+    transform:rotate(-156.6deg);
 }
 .circle-progress-bar[data-value="69"]:after{
 	content:"69%";
 }
 .circle-progress-bar[data-value="70"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="70"] .circle-progress-left:before{
-	transform:rotate(-153deg);
+	-webkit-transform:rotate(-153deg);
+    transform:rotate(-153deg);
 }
 .circle-progress-bar[data-value="70"]:after{
 	content:"70%";
 }
 .circle-progress-bar[data-value="71"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="71"] .circle-progress-left:before{
-	transform:rotate(-149.4deg);
+	-webkit-transform:rotate(-149.4deg);
+    transform:rotate(-149.4deg);
 }
 .circle-progress-bar[data-value="71"]:after{
 	content:"71%";
 }
 .circle-progress-bar[data-value="72"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="72"] .circle-progress-left:before{
-	transform:rotate(-145.8deg);
+	-webkit-transform:rotate(-145.8deg);
+    transform:rotate(-145.8deg);
 }
 .circle-progress-bar[data-value="72"]:after{
 	content:"72%";
 }
 .circle-progress-bar[data-value="73"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="73"] .circle-progress-left:before{
-	transform:rotate(-142.2deg);
+	-webkit-transform:rotate(-142.2deg);
+    transform:rotate(-142.2deg);
 }
 .circle-progress-bar[data-value="73"]:after{
 	content:"73%";
 }
 .circle-progress-bar[data-value="74"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="74"] .circle-progress-left:before{
-	transform:rotate(-138.6deg);
+	-webkit-transform:rotate(-138.6deg);
+    transform:rotate(-138.6deg);
 }
 .circle-progress-bar[data-value="74"]:after{
 	content:"74%";
 }
 .circle-progress-bar[data-value="75"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="75"] .circle-progress-left:before{
-	transform:rotate(-135deg);
+	-webkit-transform:rotate(-135deg);
+    transform:rotate(-135deg);
 }
 .circle-progress-bar[data-value="75"]:after{
 	content:"75%";
 }
 .circle-progress-bar[data-value="76"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="76"] .circle-progress-left:before{
-	transform:rotate(-131.4deg);
+	-webkit-transform:rotate(-131.4deg);
+    transform:rotate(-131.4deg);
 }
 .circle-progress-bar[data-value="76"]:after{
 	content:"76%";
 }
 .circle-progress-bar[data-value="77"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="77"] .circle-progress-left:before{
-	transform:rotate(-127.8deg);
+	-webkit-transform:rotate(-127.8deg);
+    transform:rotate(-127.8deg);
 }
 .circle-progress-bar[data-value="77"]:after{
 	content:"77%";
 }
 .circle-progress-bar[data-value="78"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="78"] .circle-progress-left:before{
-	transform:rotate(-124.2deg);
+	-webkit-transform:rotate(-124.2deg);
+    transform:rotate(-124.2deg);
 }
 .circle-progress-bar[data-value="78"]:after{
 	content:"78%";
 }
 .circle-progress-bar[data-value="79"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="79"] .circle-progress-left:before{
-	transform:rotate(-120.6deg);
+	-webkit-transform:rotate(-120.6deg);
+    transform:rotate(-120.6deg);
 }
 .circle-progress-bar[data-value="79"]:after{
 	content:"79%";
 }
 .circle-progress-bar[data-value="80"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="80"] .circle-progress-left:before{
-	transform:rotate(-117deg);
+	-webkit-transform:rotate(-117deg);
+    transform:rotate(-117deg);
 }
 .circle-progress-bar[data-value="80"]:after{
 	content:"80%";
 }
 .circle-progress-bar[data-value="81"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="81"] .circle-progress-left:before{
-	transform:rotate(-113.4deg);
+	-webkit-transform:rotate(-113.4deg);
+    transform:rotate(-113.4deg);
 }
 .circle-progress-bar[data-value="81"]:after{
 	content:"81%";
 }
 .circle-progress-bar[data-value="82"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="82"] .circle-progress-left:before{
-	transform:rotate(-109.8deg);
+	-webkit-transform:rotate(-109.8deg);
+    transform:rotate(-109.8deg);
 }
 .circle-progress-bar[data-value="82"]:after{
 	content:"82%";
 }.circle-progress-bar[data-value="83"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="83"] .circle-progress-left:before{
-	transform:rotate(-106.2deg);
+	-webkit-transform:rotate(-106.2deg);
+    transform:rotate(-106.2deg);
 }
 .circle-progress-bar[data-value="83"]:after{
 	content:"83%";
 }
 .circle-progress-bar[data-value="84"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="84"] .circle-progress-left:before{
-	transform:rotate(-102.6deg);
+	-webkit-transform:rotate(-102.6deg);
+    transform:rotate(-102.6deg);
 }
 .circle-progress-bar[data-value="84"]:after{
 	content:"84%";
 }
 .circle-progress-bar[data-value="85"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="85"] .circle-progress-left:before{
-	transform:rotate(-99deg);
+	-webkit-transform:rotate(-99deg);
+    transform:rotate(-99deg);
 }
 .circle-progress-bar[data-value="85"]:after{
 	content:"85%";
 }
 .circle-progress-bar[data-value="86"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="86"] .circle-progress-left:before{
-	transform:rotate(-95.4deg);
+	-webkit-transform:rotate(-95.4deg);
+    transform:rotate(-95.4deg);
 }
 .circle-progress-bar[data-value="86"]:after{
 	content:"86%";
 }
 
 .circle-progress-bar[data-value="87"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="87"] .circle-progress-left:before{
-	transform:rotate(-91.8deg);
+	-webkit-transform:rotate(-91.8deg);
+    transform:rotate(-91.8deg);
 }
 .circle-progress-bar[data-value="87"]:after{
 	content:"87%";
 }
 .circle-progress-bar[data-value="88"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="88"] .circle-progress-left:before{
-	transform:rotate(-88.2deg);
+	-webkit-transform:rotate(-88.2deg);
+    transform:rotate(-88.2deg);
 }
 .circle-progress-bar[data-value="88"]:after{
 	content:"88%";
 }
 .circle-progress-bar[data-value="89"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="89"] .circle-progress-left:before{
-	transform:rotate(-84.6deg);
+	-webkit-transform:rotate(-84.6deg);
+    transform:rotate(-84.6deg);
 }
 .circle-progress-bar[data-value="89"]:after{
 	content:"89%";
 }
 .circle-progress-bar[data-value="90"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="90"] .circle-progress-left:before{
-	transform:rotate(-81deg);
+	-webkit-transform:rotate(-81deg);
+    transform:rotate(-81deg);
 }
 .circle-progress-bar[data-value="90"]:after{
 	content:"90%";
 }
 .circle-progress-bar[data-value="91"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="91"] .circle-progress-left:before{
-	transform:rotate(-77.4deg);
+	-webkit-transform:rotate(-77.4deg);
+    transform:rotate(-77.4deg);
 }
 .circle-progress-bar[data-value="91"]:after{
 	content:"91%";
 }
 .circle-progress-bar[data-value="92"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="92"] .circle-progress-left:before{
-	transform:rotate(-73.8deg);
+	-webkit-transform:rotate(-73.8deg);
+    transform:rotate(-73.8deg);
 }
 .circle-progress-bar[data-value="92"]:after{
 	content:"92%";
 }
 .circle-progress-bar[data-value="93"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="93"] .circle-progress-left:before{
-	transform:rotate(-70.2deg);
+	-webkit-transform:rotate(-70.2deg);
+    transform:rotate(-70.2deg);
 }
 .circle-progress-bar[data-value="93"]:after{
 	content:"93%";
 }
 .circle-progress-bar[data-value="94"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="94"] .circle-progress-left:before{
-	transform:rotate(-66.6deg);
+	-webkit-transform:rotate(-66.6deg);
+    transform:rotate(-66.6deg);
 }
 .circle-progress-bar[data-value="94"]:after{
 	content:"94%";
 }
 .circle-progress-bar[data-value="95"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="95"] .circle-progress-left:before{
-	transform:rotate(-63deg);
+	-webkit-transform:rotate(-63deg);
+    transform:rotate(-63deg);
 }
 .circle-progress-bar[data-value="95"]:after{
 	content:"95%";
 }
 .circle-progress-bar[data-value="96"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="96"] .circle-progress-left:before{
-	transform:rotate(-59.4deg);
+	-webkit-transform:rotate(-59.4deg);
+    transform:rotate(-59.4deg);
 }
 .circle-progress-bar[data-value="96"]:after{
 	content:"96%";
 }
 .circle-progress-bar[data-value="97"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="97"] .circle-progress-left:before{
-	transform:rotate(-55.8deg);
+	-webkit-transform:rotate(-55.8deg);
+    transform:rotate(-55.8deg);
 }
 .circle-progress-bar[data-value="97"]:after{
 	content:"97%";
 }
 .circle-progress-bar[data-value="98"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="98"] .circle-progress-left:before{
-	transform:rotate(-52.2deg);
+	-webkit-transform:rotate(-52.2deg);
+    transform:rotate(-52.2deg);
 }
 .circle-progress-bar[data-value="98"]:after{
 	content:"98%";
 }
 .circle-progress-bar[data-value="99"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="99"] .circle-progress-left:before{
-	transform:rotate(-48.6deg);
+	-webkit-transform:rotate(-48.6deg);
+    transform:rotate(-48.6deg);
 }
 .circle-progress-bar[data-value="99"]:after{
 	content:"99%";
 }
 .circle-progress-bar[data-value="100"] .circle-progress-right:before{
-	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
 }
 .circle-progress-bar[data-value="100"] .circle-progress-left:before{
-	transform:rotate(-45deg);
+	-webkit-transform:rotate(-45deg);
+    transform:rotate(-45deg);
 }
 .circle-progress-bar[data-value="100"]:after{
 	content:"100%";
