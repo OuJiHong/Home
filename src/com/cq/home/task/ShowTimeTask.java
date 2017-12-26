@@ -18,7 +18,7 @@ public class ShowTimeTask {
 	
 	private static final Log logger = LogFactory.getLog(ShowTimeTask.class);
 	
-	@Scheduled(cron="0 0/5 * * * ? ")
+	@Scheduled(cron="0 0 0/1 * * ? ")
 	public void showTime(){
 		logger.info("现在时间：" + DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 	}
