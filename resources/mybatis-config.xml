@@ -19,7 +19,9 @@
 	</plugins>
 	
 	<mappers>
-		<mapper resource="mapper/user.xml"/>
+<!-- 		<mapper resource="mapper/user.xml"/> -->
+		<!--  直接使用包扫描，方便快捷  -->
+		<package name="com.cq.home.dao" />
 	</mappers>
 	
 	
