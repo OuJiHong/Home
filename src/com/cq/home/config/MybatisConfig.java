@@ -7,15 +7,23 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
+import com.cq.home.sundry.ProxySqlSessionTemplate;
+
 @Configuration
 public class MybatisConfig {
 	
-	@Bean
-	public DataSource createDataSource(){
+	/**
+	 * 暂时只能创建一个数据源到容器中，防止springBoot的自动初始化操作失败DataSourceInitializer
+	 * 写数据源
+	 * @return
+	 */
+	@Bean(name="writeDataSource")
+	public DataSource createWriteDataSource(){
 		PooledDataSource dataSource = new PooledDataSource();
 		dataSource.setDriver("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/home?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
@@ -24,19 +32,63 @@ public class MybatisConfig {
 		return dataSource;
 	}
 	
-	@Bean
-	public SqlSessionFactory createSqlSessionFactory(DataSource dataSource) throws Exception{
+	/**
+	 * 读数据源,不创建实例到容器中
+	 * @return
+	 */
+	private DataSource createReadDataSource(){
+		PooledDataSource dataSource = new PooledDataSource();
+		dataSource.setDriver("com.mysql.jdbc.Driver");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/home?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
+		dataSource.setUsername("ojh");
+		dataSource.setPassword("123456");
+		return dataSource;
+	}
+	
+	/**
+	 * 可写的sql会话工厂
+	 * @param dataSource
+	 * @return
+	 * @throws Exception
+	 */
+	@Bean(name="writeSqlSessionFactory")
+	public SqlSessionFactory createWriteSqlSessionFactory(DataSource dataSource) throws Exception{
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
 		sqlSessionFactoryBean.setDataSource(dataSource);//使用的是当前datasource
 		return sqlSessionFactoryBean.getObject();
 	}
 	
-	@Bean
-	public SqlSessionTemplate createSqlSession(SqlSessionFactory sqlSessionFactory){
-		SqlSessionTemplate sqlSession = new SqlSessionTemplate(sqlSessionFactory);
-		return sqlSession;
+	/**
+	 * 可读的sql会话工厂
+	 * @param dataSource
+	 * @return
+	 * @throws Exception
+	 */
+	@Bean(name="readSqlSessionFactory")
+	public SqlSessionFactory createReadSqlSessionFactory() throws Exception{
+		DataSource readDataSource = createReadDataSource();//创建一次
+		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
+		sqlSessionFactoryBean.setDataSource(readDataSource);//使用的是当前datasource
+		return sqlSessionFactoryBean.getObject();
 	}
+	
+	/**
+	 * 实现读写分离
+	 * 可通过构建一个sqlSessionTemplate的代理类，实现读写分离，查询方法调用读的数据库，写方法调用写的数据库
+	 * @param sqlSessionFactory
+	 * @return
+	 */
+	@Bean(name="proxySqlSessionTemplate")
+	public SqlSessionTemplate createSqlSession(@Qualifier("writeSqlSessionFactory") SqlSessionFactory writeSqlSessionFactory,
+			@Qualifier("readSqlSessionFactory") SqlSessionFactory readSqlSessionFactory){
+		SqlSessionTemplate writeSqlSessionTemplate = new SqlSessionTemplate(writeSqlSessionFactory);
+		ProxySqlSessionTemplate proxySqlSessionTemplate = new ProxySqlSessionTemplate(readSqlSessionFactory, writeSqlSessionTemplate);
+		return proxySqlSessionTemplate;
+	}
+	
+	
 	
 	
 	/**
@@ -60,6 +112,7 @@ public class MybatisConfig {
 	@Bean
 	public MapperScannerConfigurer createMapperScannerConfigurer(){
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
+		mapperScannerConfigurer.setSqlSessionTemplateBeanName("proxySqlSessionTemplate");
 		mapperScannerConfigurer.setBasePackage("com.cq.home.dao");
 		return mapperScannerConfigurer;
 	}
