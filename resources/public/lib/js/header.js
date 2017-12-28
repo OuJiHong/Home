@@ -39,4 +39,8 @@
 	write(basePath + "/lib/js/template-web.js");
 	write(basePath + "/lib/js/util.js");
 	
+	//扩展的fancybox插件,很好的图片播放插件，还有一个是viewer.js
+	write(basePath + "/lib/js/fancybox-2.1.7/source/jquery.fancybox.css");
+	write(basePath + "/lib/js/fancybox-2.1.7/source/jquery.fancybox.js");
+	
 }();
