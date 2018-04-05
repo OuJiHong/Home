@@ -15,11 +15,11 @@ public interface UserService extends BaseService<User>{
 	 * 添加用户
 	 * @param user
 	 */
-	public void add(User user) throws BizException;
+	public void add(User user);
 	
 	/**
 	 * 修改用户
 	 * @param user
 	 */
-	public void update(User user) throws BizException;
+	public void update(User user);
 }

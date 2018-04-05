@@ -43,8 +43,8 @@ public class CustomExceptionHandler{
 			}
 		}else if(ex instanceof BizException){
 			BizException bizException = (BizException)ex;
-			message.setMsg(bizException.getMessage());
-			logger.error("业务逻辑异常:" + bizException.getCode() +  "(" + bizException.getMessage() + ")");
+			message.setMsg(bizException.getLocalizedMessage());
+			logger.error("业务逻辑异常:" + bizException.getCode() +  "(" + bizException.getLocalizedMessage() + ")");
 		}else{
 			logger.error("系统内部错误 - " + errorCode, ex);
 		}

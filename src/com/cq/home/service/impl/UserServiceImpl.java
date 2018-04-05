@@ -25,7 +25,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	}
 
 	@Override
-	public void add(User user) throws BizException{
+	public void add(User user){
 		User existUser = userDao.findByName(user.getName());
 		if(existUser != null){
 			throw new BizException("user.existSame.error");
@@ -38,7 +38,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	}
 
 	@Override
-	public void update(User user) throws BizException {
+	public void update(User user) {
 		if(user.getId() == null){
 			throw new BizException("model.id.required");
 		}
