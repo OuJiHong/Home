@@ -24,6 +24,15 @@ public interface UserDao extends BaseDao<User>{
 	public User findByName(String userName);
 	
 	/**
+	 * 通过用户名和类型查询用户信息
+	 * @param userName
+	 * @param type
+	 * @return
+	 */
+	public User findByNameAndType(String userName, User.Type type);
+	
+	
+	/**
 	 * 添加数据
 	 * @param user
 	 * @return

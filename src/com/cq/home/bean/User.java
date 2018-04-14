@@ -31,7 +31,7 @@ public class User extends BaseEntity{
 	 */
 	public enum Type{
 		normal,
-		advanced
+		admin
 	}
 	
 	@ApiModelProperty(value="用户名",required=true)

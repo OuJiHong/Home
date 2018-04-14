@@ -7,27 +7,38 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import com.cq.home.bean.core.Message;
 import com.cq.home.util.JsonUtils;
 
-@ControllerAdvice
-public class CustomExceptionHandler{
+
+/**
+ *
+ *异常处理服务
+ * @author Administrator
+ * 2018年4月14日 下午3:50:21
+ *
+ */
+@Component
+public class CustomExceptionResolver extends SimpleMappingExceptionResolver{
 	
-	private static Log logger = LogFactory.getLog(CustomExceptionHandler.class);
+	private static Log logger = LogFactory.getLog(CustomExceptionResolver.class);
 	
-	/**
-	 * @param e
-	 * @param request
-	 * @return
-	 */
-	@ExceptionHandler(Exception.class)
-	public ModelAndView customeHandleException(Exception ex, HttpServletRequest request, HttpServletResponse response){
+	
+	public CustomExceptionResolver() {
+		//设置高优先级
+		setOrder(Ordered.HIGHEST_PRECEDENCE);
+	}
+	
+	@Override
+	protected ModelAndView doResolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
+			Exception ex) {
 		ModelAndView modelAndView = null;
 		
 		String errorCode = UUID.randomUUID().toString();
@@ -53,14 +64,15 @@ public class CustomExceptionHandler{
 		//动态响应数据或视图,不判断handler的注解标识
 		String accept = request.getHeader("accept");
 		if(accept.indexOf("text/html") != -1 || accept.indexOf("text/plain") != -1){
-			modelAndView = new ModelAndView("500");
-			modelAndView.addObject("message", message);
+			request.setAttribute("message", message);
+			return super.doResolveException(request, response, handler, ex);
 		}else{
 			JsonUtils.responseJson(response, message);
+			modelAndView = new ModelAndView();//返回一个空视图
 		}
 		
 		return modelAndView;
+		
 	}
-	
 	
 }

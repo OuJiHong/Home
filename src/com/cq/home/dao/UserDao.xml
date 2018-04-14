@@ -27,6 +27,11 @@
 		select * from user where name = #{userName}
 	</select>
 	 
+	 <select id="findByNameAndType" resultMap="userResult">
+	 	select * from user where name = #{userName} and type = #{type}
+	 </select>
+	 
+	 
 	<insert id="add" >
 		insert into user(name,password,phone,age,type,detail,create_date)
 		values (#{name},#{password}, #{phone}, #{age}, #{type}, #{detail}, now() )

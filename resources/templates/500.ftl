@@ -10,61 +10,34 @@
 <style>
 
 
-.container{
-	text-align:center;
-	background-color:#eee;
-	padding-left:15px;
-	padding-right:15px;
-	line-height:1.8;
-	max-width:1170px;
-	margin:auto;
-}
-
-.container .panel{
-	padding:40px 0px;
-	text-align:center;
-}
-
-
-.container .error{
-	font-size:60px;
-	color:#883322;
-	text-shadow:1px 1px 6px rgba(0,0,0,0.2);
-}
-
-.container .info{
-	font-size:14px;
-	color:#555;
-	text-align:left;
-}
-
-
-.btn{
-	color:#4787ce;
-	font-size:16px;
-	line-height:1.5;
-}
-
 
 </style>
 </head>
 <body>
 	<div class="container">
-		<div class="panel">
-			<div class="error">500</div>
-		 	<div class="info">
-		 		<div>请求的操作出错啦！</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">内部服务器错误</span>
+			</div>
+		 	<div class="panel-body">
+		 		<h1>500</h1>
+		 		<div>服务器压力山大，无法处理请求，请联系管理员</div>
 		 		<div>原因:
 		 			<span style="color:red;">
 		 				[#if message??]
 		 					${message.msg}
 		 				[/#if]
 		 				[#if exception??]
-		 					${exception.message}
+		 					${exception.localizedMessage}
 		 				[/#if]
 		 			</span>
 		 		</div>
 		 	</div>
+		 	<div class="panel-footer">
+	 			<a class="btn btn-primary" href="javascript:location.reload();">重新加载</a>
+	 			&nbsp;&nbsp;&nbsp;&nbsp;
+	 			<a class="btn btn-default" href="${base}/">返回首页</a>
+	 		</div>
 	 	</div>
 	</div>
 	

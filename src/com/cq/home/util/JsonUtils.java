@@ -63,7 +63,7 @@ public abstract class JsonUtils {
 		try {
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().write(jsonStr);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error("responseJson error", e);
 		}
 		
