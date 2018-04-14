@@ -1,9 +1,9 @@
 package com.cq.home.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import com.cq.home.config.auth.CustomDaoAuthenticationProvider;
@@ -15,7 +15,7 @@ import com.cq.home.config.auth.CustomDaoAuthenticationProvider;
  * 2018年4月14日 下午3:16:00
  *
  */
-@EnableWebSecurity
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired

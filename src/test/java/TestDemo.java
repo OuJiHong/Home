@@ -268,7 +268,6 @@ public class TestDemo <T>{
 	 */
 	public static void main_006(String[] args) throws Exception{
 		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
 //		objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		
