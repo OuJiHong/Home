@@ -2,8 +2,9 @@
 <html>
 	<head>
 		<title>管理员登录页面</title>
-		[#include "/include/head.ftl" /]
 		
+		[#include "/include/head.ftl" /]
+				
 		<style>
 			#captchaImg{
 				cursor:pointer;
@@ -25,8 +26,8 @@
 	<body>
 		<div class="container">
 			[#if errorMsg?? ]
-				<div class="alert alert-danger">
-					${errorMsg}<span data-dissmis="alert" class="close">&times;</span>
+				<div class="alert alert-danger alert-dismissible">
+					${errorMsg}<span data-dismiss="alert" class="close">&times;</span>
 				</div>
 			[/#if]
 			<!--  panel  -->
@@ -36,7 +37,8 @@
 					管理员登录
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" method="post" >
+					<form class="form-horizontal" method="post"  id="loginForm" >
+						<input type="hidden" name="_csrf" value="${_csrf.token}" />
 						<div class="form-group">
 							<label class="col-sm-4">用户名：</label>
 							<div class="col-sm-8">

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cq.home.bean.User;
+import com.cq.home.bean.User.Type;
 import com.cq.home.dao.BaseDao;
 import com.cq.home.dao.UserDao;
 import com.cq.home.exception.BizException;
@@ -47,6 +48,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 			throw new BizException("user.update.error");
 		}
 		
+	}
+
+	@Override
+	public User findByNameAndType(String userName, Type type) {
+		return userDao.findByNameAndType(userName, type);
 	}
 	
 }

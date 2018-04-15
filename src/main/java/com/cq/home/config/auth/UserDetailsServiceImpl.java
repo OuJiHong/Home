@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.cq.home.bean.User;
 import com.cq.home.dao.UserDao;
+import com.cq.home.service.UserService;
 
 
 /**
@@ -25,14 +26,14 @@ import com.cq.home.dao.UserDao;
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
-	private UserDao  userDao;
+	private UserService  userService;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		
-		User user = userDao.findByNameAndType(username, User.Type.admin);//查找管理员的用户信息
+		User user = userService.findByNameAndType(username, User.Type.admin);//查找管理员的用户信息
 		
 		if(user == null) {
 			throw new UsernameNotFoundException("用户“"+username+"”未找到");

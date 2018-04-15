@@ -10,6 +10,7 @@
   	后台服务项目
   </description>
   
+  <!--  spring boot 问题多多，高于1.2.8版本差不多都会filtering失效，不知道是不是环境问题，使用的是jdk1.8-->
   <parent>
 	  <groupId>org.springframework.boot</groupId>
 	  <artifactId>spring-boot-starter-parent</artifactId>
@@ -106,6 +107,13 @@
 		<artifactId>mysql-connector-java</artifactId>
 	</dependency>
 	
+	<!--  需要依赖连接池，否则不会自动配置数据源 , 参考DataSourceAutoConfiguration -->
+			
+	<dependency>
+		<groupId>commons-dbcp</groupId>
+        <artifactId>commons-dbcp</artifactId>
+	</dependency>	
+	
 	<!--  整合swagger -->
 	 <dependency>
           <groupId>io.springfox</groupId>
@@ -130,6 +138,21 @@
   
   <build>
   	<finalName>home</finalName>
+  	<resources>
+  		<resource>
+  			<directory>src/main/resources</directory>
+  			<excludes>
+  				<exclude>dbcp.properties</exclude>
+  			</excludes>
+  		</resource>
+  		<resource>
+  			<directory>src/main/resources</directory>
+  			<includes>
+  				<include>dbcp.properties</include>
+  			</includes>
+  			<filtering>true</filtering>
+  		</resource>
+  	</resources>
     <plugins>
 		<plugin>
 			<groupId>org.springframework.boot</groupId>

@@ -30,8 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http
 			.authorizeRequests().antMatchers("/admin/**").authenticated().and()
-			.formLogin().loginPage("/admin/login").defaultSuccessUrl("/admin/index").permitAll().and()
-			.httpBasic();
+			.formLogin().loginPage("/admin/login").defaultSuccessUrl("/admin/index").permitAll();
+		
 	}
 	
 	@Override

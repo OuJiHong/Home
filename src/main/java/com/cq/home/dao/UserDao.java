@@ -1,5 +1,7 @@
 package com.cq.home.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.cq.home.bean.User;
 
 /**
@@ -29,7 +31,7 @@ public interface UserDao extends BaseDao<User>{
 	 * @param type
 	 * @return
 	 */
-	public User findByNameAndType(String userName, User.Type type);
+	public User findByNameAndType(@Param("userName") String userName, @Param("type") User.Type type);
 	
 	
 	/**

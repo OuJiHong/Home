@@ -35,7 +35,7 @@
 				<!--  内容  -->
 				<div class="col-sm-10">
 					<div class="embed-responsive embed-responsive-4by3">
-						<iframe class="embed-responsive-item"  src="welcome" name="contentFrame"></iframe>
+						<iframe class="embed-responsive-item"  src="" name="contentFrame"></iframe>
 					</div>
 				</div>
 				
