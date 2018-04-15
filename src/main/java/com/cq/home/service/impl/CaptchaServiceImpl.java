@@ -55,7 +55,7 @@ public class CaptchaServiceImpl implements CaptchaService{
 		Font font = createFont(captchaType.getCount(), width, height);
 		graphics.setFont(font);
 		FontMetrics fontMetrics = graphics.getFontMetrics();
-		int strY = (height / 2) + (fontMetrics.getAscent() / 2);
+		int strY = (height / 2) + (fontMetrics.getAscent() / 3);
 		for(int i = 0; i < randomStr.length(); i++) {
 			String code = randomStr.substring(i , i +1);
 			graphics.setColor(randomColor(0,100));

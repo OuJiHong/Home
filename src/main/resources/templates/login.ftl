@@ -6,6 +6,14 @@
 		[#include "/include/head.ftl" /]
 				
 		<style>
+		
+		    body{
+		    	background:url('${base}/lib/images/bg.jpg') no-repeat center;
+		    	-webkit-background-size:100% auto;
+		    	background-size:100% auto;
+		    }
+		    
+		    
 			#captchaImg{
 				cursor:pointer;
 				height:30px;
@@ -19,6 +27,8 @@
 				max-width:480px;
 				margin:auto;
 				margin-top:40px;
+				-webkit-box-shadow:1px 1px 6px rgba(0,0,0,0.2);
+				box-shadow:1px 1px 6px rgba(0,0,0,0.2);
 			}
 		</style>
 	</head>
@@ -38,7 +48,7 @@
 				</div>
 				<div class="panel-body">
 					<form class="form-horizontal" method="post"  id="loginForm" >
-						<input type="hidden" name="_csrf" value="${_csrf.token}" />
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						<div class="form-group">
 							<label class="col-sm-4">用户名：</label>
 							<div class="col-sm-8">
@@ -66,8 +76,14 @@
 						</div> 
 						<div class="form-group">
 							<div class="col-sm-offset-4 col-sm-8">
-								<button type="submit" class="btn btn-primary">登录</button>
-								<button type="reset" class="btn btn-default">重置</button>
+								<div class="row">
+									<div class="col-sm-6">
+										<button type="submit" class="btn btn-primary btn-block">登录</button>
+									</div>
+									<div class="col-sm-6">
+										<button type="reset" class="btn btn-default btn-block">重置</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</form>

@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.cq.home.bean.User;
-import com.cq.home.dao.UserDao;
+import com.cq.home.bean.core.UserLocalDetails;
 import com.cq.home.service.UserService;
 
 
@@ -39,7 +39,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("用户“"+username+"”未找到");
 		}
 		
-		org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(username, user.getPassword(), authorities);
+		UserLocalDetails userDetails  = new UserLocalDetails(username, user.getPassword(), authorities);
+		userDetails.setUser(user);//保存本地用户对象
 		
 		return userDetails;
 	}

@@ -28,9 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		//默认参数名username,password, 登录请求post方法的/login, 失敗url /login?error
 		http.authorizeRequests().antMatchers("/admin/getCaptcha").permitAll();
 		
-		http
-			.authorizeRequests().antMatchers("/admin/**").authenticated().and()
-			.formLogin().loginPage("/admin/login").defaultSuccessUrl("/admin/index").permitAll();
+		http.authorizeRequests().antMatchers("/admin/**").authenticated();
+		http.formLogin().loginPage("/admin/login").defaultSuccessUrl("/admin/index").permitAll();
+		
+		http.logout().logoutUrl("/admin/logout").logoutSuccessUrl("/admin/logout?logout")
+			.invalidateHttpSession(true).permitAll();
+		
+		
+		http.headers().frameOptions().disable();
 		
 	}
 	

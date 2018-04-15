@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cq.home.bean.User;
 import com.cq.home.bean.core.Captcha;
 import com.cq.home.bean.core.Captcha.CaptchaType;
 import com.cq.home.controller.BaseController;
@@ -39,10 +40,21 @@ public class AdminIndexController extends BaseController{
 	
 	
 	@RequestMapping(value= {"/index",""})
-	public String index() {
+	public String index(Model model) {
+		User user = currentUser();
+		model.addAttribute("user", user);
 		return "index";
 	}
 	
+	
+	/**
+	 * 欢迎页面
+	 * @return
+	 */
+	@RequestMapping(value="welcome")
+	public String welcome() {
+		return "welcome";
+	}
 	
 
 	/**
@@ -79,6 +91,23 @@ public class AdminIndexController extends BaseController{
 		}
 		
 		return "login";
+	}
+	
+	
+	/**
+	 * 注销
+	 * @return
+	 */
+	@RequestMapping("logout")
+	public String logout(Model model, HttpServletRequest request){
+		
+		String logout = request.getParameter("logout");
+		//是否存在参数
+		if(logout != null) {
+			model.addAttribute("logout", true);
+		}
+		
+		return "logout";
 	}
 	
 	
