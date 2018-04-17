@@ -280,7 +280,7 @@ public class ExcelFieldProcessor<T> {
 			_sheet = workbook.createSheet();
 		}
 		
-		if(_rowIndex >= (pageNumber * pageSize)) {
+		if(_rowIndex >= pageSize) {
 			pageNumber++;
 			_sheet = workbook.createSheet();
 			_rowIndex = 0;
