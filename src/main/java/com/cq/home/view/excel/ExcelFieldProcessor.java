@@ -283,6 +283,7 @@ public class ExcelFieldProcessor<T> {
 		if(_rowIndex >= (pageNumber * pageSize)) {
 			pageNumber++;
 			_sheet = workbook.createSheet();
+			_rowIndex = 0;
 		}
 		
 		Row row = _sheet.createRow(nextRowIndex());
