@@ -26,6 +26,7 @@ import com.cq.home.bean.vo.UserExcelVo;
 import com.cq.home.controller.BaseController;
 import com.cq.home.exception.BizException;
 import com.cq.home.service.UserService;
+import com.cq.home.util.ZipUtils;
 import com.cq.home.view.excel.CommonExcelView;
 import com.cq.home.view.excel.ExcelFieldProcessor;
 import com.cq.home.view.zip.ZipView;
@@ -105,13 +106,26 @@ public class AdminUserController extends BaseController{
 		
 		if(zip != null && zip) {
 			ExcelFieldProcessor excelProcessor = new ExcelFieldProcessor(UserExcelVo.class);
+			excelProcessor.write(excelList);
+			excelProcessor.autoSizeColumn();
 			try {
-				File tmpFile = File.createTempFile("tmp", ".xls");
+				File tmpFile = File.createTempFile("tempx", ".xls");
+				File userInfoDir = new File(tmpFile.getParentFile(), "userInfo");
+				if(userInfoDir.exists()) {
+					ZipUtils.deleteQuietly(userInfoDir);
+				}
+				
+				userInfoDir.mkdir();//创建目录
+				
 				FileOutputStream outStream = new FileOutputStream(tmpFile);
 				excelProcessor.outToStream(outStream);
 				outStream.close();
+				
+				//复制到文件夹下面
+				ZipUtils.copy(tmpFile, userInfoDir);
+				
 				//产生视图
-				ZipView zipView = new ZipView(tmpFile);
+				ZipView zipView = new ZipView(userInfoDir);
 				return zipView;
 			} catch (IOException e) {
 				throw new BizException("导出处理错误", e);

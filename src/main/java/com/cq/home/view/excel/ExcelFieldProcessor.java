@@ -19,6 +19,7 @@ import java.util.Map;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
@@ -67,7 +68,7 @@ public class ExcelFieldProcessor {
 	 * 
 	 */
 	public static enum StyleFactory{
-		titleStyle((short)260, Font.BOLDWEIGHT_BOLD,HSSFColor.BLACK.index,CellStyle.ALIGN_CENTER),
+		titleStyle((short)240, Font.BOLDWEIGHT_BOLD,HSSFColor.BLACK.index,CellStyle.ALIGN_CENTER),
 		normalStyle((short)240, Font.BOLDWEIGHT_NORMAL,HSSFColor.BLACK.index,CellStyle.ALIGN_LEFT)
 		;
 
@@ -444,27 +445,35 @@ public class ExcelFieldProcessor {
 			value = "";
 		}
 		
+		Object tmpCellValue = value;//临时记录实际设置的数据
+		
 		//非标题才格式化数据
 		if(!isTitle && mappingEntry.format.trim().length() > 0) {
 			//格式化数据
 			try {
 				String newValue = String.format(mappingEntry.format, value);
 				cell.setCellValue(newValue);
+				tmpCellValue = newValue;
 			}catch(Exception e) {
 				throw new IllegalArgumentException("格式化字段‘"+mappingEntry.name+"’失败，使用的表达式为：" + mappingEntry.format, e);
 			}
 			
 		}else {
 			if(value instanceof Boolean) {
-				cell.setCellValue((Boolean)value);
+				tmpCellValue = (Boolean)value;
+				cell.setCellValue((Boolean)tmpCellValue);
 			}else if(value instanceof Number){
-				cell.setCellValue(((Number)value).doubleValue());
+				tmpCellValue = (Number)value;
+				cell.setCellValue(((Number)tmpCellValue).doubleValue());
 			}else if(value instanceof Date){
-				cell.setCellValue(defaultDateFormat.format((Date)value));
+				tmpCellValue = defaultDateFormat.format((Date)value);
+				cell.setCellValue((String)tmpCellValue);
 			}else if(value instanceof Calendar){
 				Calendar tmpVal = (Calendar)value;
-				cell.setCellValue(defaultDateFormat.format(tmpVal.getTime()));
+				tmpCellValue = defaultDateFormat.format(tmpVal.getTime());
+				cell.setCellValue((String)tmpCellValue);
 			}else {
+				tmpCellValue = ObjectUtils.toString(value.toString());
 				cell.setCellValue(value.toString());
 			}
 			
@@ -474,21 +483,23 @@ public class ExcelFieldProcessor {
 		if(isTitle) {
 			CellStyle cellStyle = this.titleStyle.getObject(workbook);
 			cell.setCellStyle(cellStyle);
+			cell.getRow().setHeight((short)(this.titleStyle.fontSize * 2));
 		}else {
 			CellStyle cellStyle = this.defaultStyle.getObject(workbook);
 			cell.setCellStyle(cellStyle);
+			cell.getRow().setHeight((short)(this.defaultStyle.fontSize * 1.6));
 		}
 		
 		
-		//统计最大列宽
+		//统计最大列宽,使用实际设置的cell值进行统计
 		try {
-			Integer cellWidth = value.toString().getBytes("GBK").length;
+			Integer cellWidth = tmpCellValue.toString().getBytes("GBK").length;
 			Integer oldWidth = _columnMaxWidthRecord.get(cell.getColumnIndex());
 			if(oldWidth == null || oldWidth < cellWidth) {
 				_columnMaxWidthRecord.put(cell.getColumnIndex(), cellWidth);
 			}
-		} catch (UnsupportedEncodingException e) {
-			//e.printStackTrace();//ignore
+		} catch (Exception e) {
+			logger.debug("统计列宽数据不成功-" + value);
 		}
 		
 		
@@ -504,7 +515,7 @@ public class ExcelFieldProcessor {
 			for(int j = 0 ; j < mappingEntries.size();j++) {
 				Integer cellWidth = _columnMaxWidthRecord.get(j);
 				if(cellWidth != null) {
-					sheet.setColumnWidth(j, cellWidth * this.titleStyle.fontSize);
+					sheet.setColumnWidth(j, (int)((cellWidth + 2) * 256));//1/256为一个字符单位
 				}else {
 					sheet.autoSizeColumn(j);
 				}
@@ -520,8 +531,10 @@ public class ExcelFieldProcessor {
 	 * @param stream
 	 */
 	public void outToStream(OutputStream stream) {
+		//为了防止关闭类似于ServletResponse的输出流，所以不再自动close
 		try {
 			this.workbook.write(stream);
+			stream.flush();
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e);
 		}

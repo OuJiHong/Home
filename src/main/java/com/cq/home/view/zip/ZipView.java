@@ -90,9 +90,10 @@ public class ZipView extends AbstractView{
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String realPath = request.getServletContext().getRealPath("/");
+		//String realPath = request.getServletContext().getRealPath("/");
+		//String outPath = realPath + tempOutFolder;
 		
-		File outFile = ZipUtils.compress(source, realPath + tempOutFolder);
+		File outFile = ZipUtils.compress(source);
 		
 
 		// Set the content type.
