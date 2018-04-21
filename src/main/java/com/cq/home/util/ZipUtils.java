@@ -12,8 +12,6 @@ import java.util.zip.ZipOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cq.home.view.excel.ExcelFieldProcessor;
-
 /**
  *
  *提供文件压缩功能 
@@ -92,7 +90,7 @@ public class ZipUtils {
 				try {
 					inputStream.close();
 				}catch(Exception e) {
-					//ignore
+					logger.error("compress close error", e );
 				}
 			}
 			
@@ -133,7 +131,7 @@ public class ZipUtils {
 				try {
 					out.close();
 				}catch(Exception e) {
-					//ignore exception
+					logger.error("uncompress close error", e );
 				}
 			}
 		}
@@ -163,7 +161,7 @@ public class ZipUtils {
 			try {
 				input.close();
 			}catch(Exception e) {
-				//ignore
+				logger.error("transferData close error", e);
 			}
 		}
 	}

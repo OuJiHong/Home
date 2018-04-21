@@ -11,7 +11,7 @@ import java.util.List;
 public interface BaseDao<T> {
 	
 	/**
-	 * 查询列表
+	 * 查询列表,提供基础的分页操作
 	 * @param params
 	 * @return
 	 */

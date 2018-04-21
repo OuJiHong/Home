@@ -15,7 +15,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("Spring Boot 服务启动...");
+		System.out.println("Spring Boot 服.务启动...");
 		SpringApplication.run(Main.class, args);
 		
 	}

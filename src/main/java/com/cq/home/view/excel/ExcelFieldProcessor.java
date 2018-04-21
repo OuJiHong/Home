@@ -31,8 +31,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cq.home.util.ZipUtils;
-
 /**
  * excelField 注解的处理,基于POI处理
  * @author 欧集红 
@@ -304,7 +302,7 @@ public class ExcelFieldProcessor {
 			this.workbook = new HSSFWorkbook(inputStream);//excel2003
 		}catch(Exception e) {
 			try {
-				this.workbook = new XSSFWorkbook(inputStream);//exce2007
+				this.workbook = new XSSFWorkbook(inputStream);//excel2007
 			} catch (IOException e1) {
 				throw new IllegalArgumentException("读取excel失败", e1);
 			}

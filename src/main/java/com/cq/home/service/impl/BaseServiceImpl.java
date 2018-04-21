@@ -37,7 +37,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 
 	@Override
 	public PageInfo<T> findPage(Pageable pageable, Object params) {
-		PageHelper.startPage(pageable);
+		PageHelper.startPage(pageable);//设置了一个线程变量，后续根据线程变量的分页对象拦截sql，并修改
 		List<T> list = findList(params);
 		PageInfo<T> pageInfo = new PageInfo<T>(list);
 		return pageInfo;

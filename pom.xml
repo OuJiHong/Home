@@ -79,7 +79,10 @@
 	    <version>1.9.2</version>
 	</dependency>
 	
-	
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+	</dependency>
       
       
 	<!--  用于测试   -->
