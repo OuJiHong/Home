@@ -104,12 +104,32 @@
 	    <version>5.1.2</version>
 	</dependency>
 
+	<!--  hibernate -->
+     <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-entitymanager</artifactId>
+<!--          <version>4.2.3.Final</version> -->
+     </dependency>
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-orm</artifactId>
+<!--          <version>4.0.3.RELEASE</version> -->
+     </dependency>
+       
 	<!-- mysql驱动包 -->
 	<dependency>
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
 	</dependency>
 	
+       <!--  ojdbc -->
+      <dependency>
+	    <groupId>ojdbc</groupId>
+	    <artifactId>ojdbc</artifactId>
+	    <version>14</version>
+	</dependency>
+
+
 	<!--  需要依赖连接池，否则不会自动配置数据源 , 参考DataSourceAutoConfiguration -->
 			
 	<dependency>
@@ -143,6 +163,21 @@
             <version>3.9</version>
        </dependency>
        
+       	<!--  mongodb support -->
+	   <dependency>
+	       <groupId>org.springframework.data</groupId>
+	       <artifactId>spring-data-mongodb</artifactId>
+<!-- 	       <version>2.0.6.RELEASE</version> -->
+	   </dependency>
+	   
+	   	
+		<!--  fastjson -->
+<!-- 		 <dependency> -->
+<!--             <groupId>com.alibaba</groupId> -->
+<!--             <artifactId>fastjson</artifactId> -->
+<!--             <version>1.2.31</version> -->
+<!--         </dependency> -->
+        
   </dependencies>
   
   

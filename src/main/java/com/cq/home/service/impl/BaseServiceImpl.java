@@ -12,7 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 /**
- * 基础服务
+ * 基础服务,统一应用事务处理
  * @author OJH
  *
  */

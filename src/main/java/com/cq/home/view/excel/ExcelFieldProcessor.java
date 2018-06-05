@@ -1,15 +1,17 @@
 package com.cq.home.view.excel;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -32,6 +34,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.cq.home.exception.BizException;
 /**
  * excelField 注解的处理,基于POI处理
  * @author 欧集红 
@@ -39,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0
  * 
  */
-public class ExcelFieldProcessor {
+public class ExcelFieldProcessor <T> {
 	
 	private static Logger logger  = LoggerFactory.getLogger(ExcelFieldProcessor.class);
 	
@@ -130,22 +133,14 @@ public class ExcelFieldProcessor {
 	 * @param <V>
 	 */
 	public static class MappingEntry{
-		private int cellIndex;//读取时获取标题索引位置
+		private int cellIndex = -1;//读取时获取标题索引位置
 		private String name;//属性名称
 		private String title;//标题
-		private String format = "";//格式化,默认一个空值
 		
 		public MappingEntry(String name, String title) {
 			super();
 			this.name = name;
 			this.title = title;
-		}
-		
-		public MappingEntry(String name, String title, String format) {
-			super();
-			this.name = name;
-			this.title = title;
-			this.format = format;
 		}
 		
 	}
@@ -178,13 +173,8 @@ public class ExcelFieldProcessor {
 	/**
 	 *excel工作薄 
 	 */
-	private Workbook workbook;
+	private Workbook workbook = new HSSFWorkbook();
 	
-	
-	/**
-	 *分页编号 
-	 */
-	private int pageNumber = 1;
 	
 	/**
 	 * 分页大小
@@ -194,36 +184,17 @@ public class ExcelFieldProcessor {
 	/**
 	 * 内部记录位置 
 	 */
-	private int _rowIndex = 0;
-	
-	private Sheet _sheet;
+	private int _rowIndex = -1;
 	
 	/**
-	 * 最大列宽统计
+	 * 默认为第一个工作表
 	 */
-	private Map<Integer, Integer> _columnMaxWidthRecord = new HashMap<Integer, Integer>();
-	
-	
-	/**
-	 * @param convertType
-	 */
-	public ExcelFieldProcessor(Class<?> convertType) {
-		this(new HSSFWorkbook(), convertType);
-	}
-	
-	/**
-	 * @param convertType
-	 */
-	public ExcelFieldProcessor(List<MappingEntry> mappingEntries) {
-		this(new HSSFWorkbook(), mappingEntries);
-	}
-	
+	private int _sheetIndex = 0;
 	
 	/**
 	 * @param convertType 普通的POJO类型
 	 */
-	public ExcelFieldProcessor(Workbook workbook, Class<?> convertType) {
-		this.workbook = workbook;//必须
+	public ExcelFieldProcessor(Class<T> convertType) {
 		this.convertType = convertType;
 		//转换
 		if(this.convertType != null) {
@@ -236,10 +207,84 @@ public class ExcelFieldProcessor {
 	/**
 	 * @param mappingEntries
 	 */
-	public ExcelFieldProcessor(Workbook workbook, List<MappingEntry> mappingEntries) {
-		this.workbook = workbook;//必须
+	public ExcelFieldProcessor(List<MappingEntry> mappingEntries) {
 		this.mappingEntries = mappingEntries;
+		//初始化位置,按原始顺序排列
+		for(int i = 0; i < this.mappingEntries.size(); i++) {
+			MappingEntry m = this.mappingEntries.get(i);
+			if(m != null) {
+				m.cellIndex = i;
+			}
+		}
 		initTitle(this.mappingEntries);//初始化标题
+	}
+	
+	
+
+	
+	/**
+	 * 从一个数据流中加载一个新的工作簿
+	 * @param excelInputStream
+	 */
+	public void load(InputStream excelInputStream) {
+		Workbook workbook = null;
+		try {
+			workbook = new HSSFWorkbook(excelInputStream);//excel2003
+		}catch(Exception e) {
+			try {
+				workbook = new XSSFWorkbook(excelInputStream);//excel2007
+			} catch (IOException e1) {
+				throw new IllegalArgumentException("读取excel失败", e1);
+			}
+		}finally {
+			if(excelInputStream != null) {
+				try {
+					excelInputStream.close();
+				} catch (IOException e) {
+					logger.error("excelInputStream close error - " + e.getMessage());
+				}
+			}
+		}
+		
+		load(workbook);
+	}
+	
+	/**
+	 * 加载一个新的工作簿
+	 * @param workbook
+	 */
+	public void load(Workbook workbook) {
+		this.workbook = workbook;
+		this.defaultStyle = null;//以模版的样式为准
+		
+		//按照加载的标题，重新建立字段映射顺序
+		int numberOfSheets = this.workbook.getNumberOfSheets();
+		//重置工作表
+		this._sheetIndex = 0 ;
+		
+		titleEnd:
+		while(_sheetIndex < numberOfSheets) {
+			resetPosition();
+			Sheet sheet = currentSheet();
+			//因为返回的行是索引，所以是<=
+			while(position() <= sheet.getLastRowNum()) {
+				Row row = sheet.getRow(nextPosition());
+				if(row == null) {
+					continue;
+				}
+				
+				//处理标题
+				boolean processSuccess = processTitleInfo(row, this.mappingEntries);
+				if(processSuccess) {
+					break titleEnd;
+				}
+				
+			}
+			
+			_sheetIndex++;
+		}
+		
+		
 	}
 	
 	
@@ -250,18 +295,36 @@ public class ExcelFieldProcessor {
 	 */
 	private List<MappingEntry> generatedMappingEntries(Class<?> convertType){
 		List<MappingEntry> list = new ArrayList<MappingEntry>();
-		Field[] fields = convertType.getDeclaredFields();//暂时只检测字段，不检测get方法，以便统一规范
-		for(Field field : fields) {
-			ExcelField excelField = field.getAnnotation(ExcelField.class);
-			if(excelField != null) {
-				String name = excelField.value();
-				if(name.length() == 0) {
-					name = field.getName();
-				}
-				MappingEntry entry = new MappingEntry(field.getName(), name , excelField.format());
-				list.add(entry);
-			}
+		//包含父类的字段,如果重名可能会覆盖
+		Class<?> tempClass = convertType;
+		List<Class<?>> orderClasses = new ArrayList<Class<?>>();
+		while(tempClass != null && tempClass != Object.class) {
+			orderClasses.add(tempClass);
+			tempClass = tempClass.getSuperclass();
 		}
+		
+		Collections.reverse(orderClasses);//由父类到子类的顺序查找，使得列表字段有序
+		int cellIndex = 0;
+		for(Class<?> clazz : orderClasses) {
+			Field[] fields = clazz.getDeclaredFields();//暂时只检测字段，不检测get方法，以便统一规范
+			for(Field field : fields) {
+				ExcelField excelField = field.getAnnotation(ExcelField.class);
+				if(excelField != null) {
+					String name = excelField.value();
+					if(name.length() == 0) {
+						name = field.getName();
+					}
+					MappingEntry entry = new MappingEntry(field.getName(), name );
+					entry.cellIndex = cellIndex;
+					list.add(entry);
+					
+					cellIndex++;//按原始顺序排列cell
+				}
+			}
+			
+			
+		}
+
 		
 		return list;
 	}
@@ -276,68 +339,15 @@ public class ExcelFieldProcessor {
 			titleData.put(mappingEntry.name, mappingEntry.title);
 		}
 		
-		addRow(titleData, mappingEntries, true);//添加标题
-	}
-	
-	/**
-	 * 核心处理方法，产生结果
-	 * @param data
-	 * @param convertType
-	 * @return
-	 */
-	public Workbook write(Collection<?> dataCollection) {
-		
-		for(Object data : dataCollection) {
-			addRow(data, this.mappingEntries, false);
+		Row row = addNextRow(titleData);//添加标题
+		//设置标题样式
+		for(int i = 0 ; i < row.getLastCellNum(); i++) {
+			Cell cell = row.getCell(i);
+			CellStyle cellStyle = this.titleStyle.getObject(workbook);
+			cell.setCellStyle(cellStyle);
+			cell.getRow().setHeight((short)(this.titleStyle.fontSize * 2));
 		}
 		
-		return this.workbook;
-	}
-
-	/**
-	 * 读取数据
-	 * @return
-	 */
-	public <T> List<T> readAll(InputStream inputStream){
-		try {
-			this.workbook = new HSSFWorkbook(inputStream);//excel2003
-		}catch(Exception e) {
-			try {
-				this.workbook = new XSSFWorkbook(inputStream);//excel2007
-			} catch (IOException e1) {
-				throw new IllegalArgumentException("读取excel失败", e1);
-			}
-		}
-		
-		List<T> list = new ArrayList<T>();
-		int numberOfSheets = this.workbook.getNumberOfSheets();
-		boolean titleProcessed = false;//是否成功处理标题
-		for(int i = 0 ; i < numberOfSheets; i++) {
-			Sheet sheet = this.workbook.getSheetAt(i);
-			//因为返回的行是索引，所以是<=
-			for(int j = 0; j <= sheet.getLastRowNum(); j++) {
-				Row row = sheet.getRow(j);
-				if(row == null) {
-					continue;
-				}
-				
-				//处理标题
-				if(!titleProcessed) {
-					titleProcessed = processTitleInfo(row, this.mappingEntries);
-					continue;
-				}
-				
-				
-				try {
-					T t = read(row, this.mappingEntries);
-					list.add(t);
-				} catch (Exception e) {
-					logger.debug("数据读取失败：" + e.getMessage());
-				}
-				
-			}
-		}
-		return list;
 	}
 	
 	/**
@@ -368,15 +378,84 @@ public class ExcelFieldProcessor {
 	}
 	
 	/**
+	 * 核心处理方法，产生结果
+	 * @param data
+	 * @param convertType
+	 * @return
+	 */
+	public Workbook write(Collection<T> dataCollection) {
+		
+		for(Object data : dataCollection) {
+			addNextRow(data);
+		}
+		
+		return this.workbook;
+	}
+
+	/**
+	 * 读取数据
+	 * @return
+	 */
+	public List<T> readAll(InputStream inputStream, boolean ignoreError){
+		this.load(inputStream);
+		
+		//标题处理时可能读取了多个工作表，所以这里不能重置_sheetIndex的值
+		List<T> list = new ArrayList<T>();
+		int numberOfSheets = this.workbook.getNumberOfSheets();
+		
+		//去掉循环，只读取第一页，很多模版的第二页不是需要导入的数据
+		if(_sheetIndex < numberOfSheets) {
+			//这里不能重置行索引，因为读取的标题行要排除
+			Sheet sheet = currentSheet();
+			//因为返回的行是索引，所以是<=
+			while(position() <= sheet.getLastRowNum()) {
+				try {
+					T t = readNextRow();
+					if(t != null) {
+						list.add(t);
+					}
+				} catch (Exception e) {
+					if(ignoreError) {
+						logger.debug("数据读取失败,在第'"+ position() +"'行记录：" + e.getMessage());
+					}else {
+						throw new BizException("数据读取失败,在第'"+  position() +"'行记录", e);
+					}
+				}
+			}
+			
+			//_sheetIndex++;
+		}
+		
+		
+		return list;
+	}
+	
+
+	
+	/**
 	 * 读取一行数据
 	 * @param row
 	 * @param mappingEntries
 	 * @return
 	 * @throws Exception
 	 */
-	private <T> T read(Row row, List<MappingEntry> mappingEntries) throws Exception{
+	private <T> T readNextRow() throws Exception{
+		Sheet sheet = currentSheet();
+		if(sheet == null) {
+			return null;
+		}
+		
+		Row row = sheet.getRow(nextPosition());
+		if(row  == null) {
+			return null;
+		}
+		
 		Object obj = this.convertType.newInstance();
 		for(MappingEntry entry : mappingEntries) {
+			if(entry.cellIndex == -1) {
+				//不存在的位置
+				continue;
+			}
 			Cell cell = row.getCell(entry.cellIndex);
 			if(cell == null) {
 				continue;
@@ -410,29 +489,35 @@ public class ExcelFieldProcessor {
 	 * @param data
 	 * @param mappingEntries
 	 */
-	private void addRow(Object data, List<MappingEntry> mappingEntries, boolean isTitle) {
-		if(_sheet == null) {
-			_sheet = workbook.createSheet();
+	private Row addNextRow(Object data) {
+		Sheet sheet = currentSheet();
+		//是否需要分页,老版本的excel有行数限制
+		if(this.workbook instanceof HSSFWorkbook) {
+			if(sheet == null || _rowIndex >= pageSize) {
+				sheet = workbook.createSheet();
+				_sheetIndex = workbook.getSheetIndex(sheet);
+				resetPosition();
+			}
 		}
 		
-		if(_rowIndex >= pageSize) {
-			pageNumber++;
-			_sheet = workbook.createSheet();
-			_rowIndex = 0;
-		}
 		
-		Row row = _sheet.createRow(nextRowIndex());
+		Row row = sheet.createRow(nextPosition());
 		for(int i = 0 ; i < mappingEntries.size();i++) {
 			MappingEntry entry = mappingEntries.get(i);
-			Cell cell = row.createCell(i);
+			//按索引位置写入
+			if(entry.cellIndex == -1) {
+				continue;
+			}
+			Cell cell = row.createCell(entry.cellIndex);
 			try {
 				Object value = PropertyUtils.getProperty(data, entry.name);
-				setCellValue(cell, entry, value, isTitle);
+				setCellValue(cell, entry, value);
 			} catch (Exception e) {
 				logger.debug("数据写入失败：" + e.getMessage());
 			} 
 		}
 		
+		return row;
 	}
 	
 	/**
@@ -440,68 +525,37 @@ public class ExcelFieldProcessor {
 	 * @param cell
 	 * @param value
 	 */
-	protected void setCellValue(Cell cell, MappingEntry mappingEntry, Object value, boolean isTitle) {
+	protected void setCellValue(Cell cell, MappingEntry mappingEntry, Object value) {
 		if(value == null) {
 			value = "";
 		}
 		
 		Object tmpCellValue = value;//临时记录实际设置的数据
 		
-		//非标题才格式化数据
-		if(!isTitle && mappingEntry.format.trim().length() > 0) {
-			//格式化数据
-			try {
-				String newValue = String.format(mappingEntry.format, value);
-				cell.setCellValue(newValue);
-				tmpCellValue = newValue;
-			}catch(Exception e) {
-				throw new IllegalArgumentException("格式化字段‘"+mappingEntry.name+"’失败，使用的表达式为：" + mappingEntry.format, e);
-			}
-			
+		if(value instanceof Boolean) {
+			tmpCellValue = (Boolean)value;
+			cell.setCellValue((Boolean)tmpCellValue);
+		}else if(value instanceof Number){
+			tmpCellValue = (Number)value;
+			cell.setCellValue(((Number)tmpCellValue).doubleValue());
+		}else if(value instanceof Date){
+			tmpCellValue = defaultDateFormat.format((Date)value);
+			cell.setCellValue((String)tmpCellValue);
+		}else if(value instanceof Calendar){
+			Calendar tmpVal = (Calendar)value;
+			tmpCellValue = defaultDateFormat.format(tmpVal.getTime());
+			cell.setCellValue((String)tmpCellValue);
 		}else {
-			if(value instanceof Boolean) {
-				tmpCellValue = (Boolean)value;
-				cell.setCellValue((Boolean)tmpCellValue);
-			}else if(value instanceof Number){
-				tmpCellValue = (Number)value;
-				cell.setCellValue(((Number)tmpCellValue).doubleValue());
-			}else if(value instanceof Date){
-				tmpCellValue = defaultDateFormat.format((Date)value);
-				cell.setCellValue((String)tmpCellValue);
-			}else if(value instanceof Calendar){
-				Calendar tmpVal = (Calendar)value;
-				tmpCellValue = defaultDateFormat.format(tmpVal.getTime());
-				cell.setCellValue((String)tmpCellValue);
-			}else {
-				tmpCellValue = ObjectUtils.toString(value.toString());
-				cell.setCellValue(value.toString());
-			}
-			
+			tmpCellValue = ObjectUtils.toString(value.toString());
+			cell.setCellValue(value.toString());
 		}
+			
 		
-		//是否是标题
-		if(isTitle) {
-			CellStyle cellStyle = this.titleStyle.getObject(workbook);
-			cell.setCellStyle(cellStyle);
-			cell.getRow().setHeight((short)(this.titleStyle.fontSize * 2));
-		}else {
+		if(this.defaultStyle != null) {
 			CellStyle cellStyle = this.defaultStyle.getObject(workbook);
 			cell.setCellStyle(cellStyle);
 			cell.getRow().setHeight((short)(this.defaultStyle.fontSize * 1.6));
 		}
-		
-		
-		//统计最大列宽,使用实际设置的cell值进行统计
-		try {
-			Integer cellWidth = tmpCellValue.toString().getBytes("GBK").length;
-			Integer oldWidth = _columnMaxWidthRecord.get(cell.getColumnIndex());
-			if(oldWidth == null || oldWidth < cellWidth) {
-				_columnMaxWidthRecord.put(cell.getColumnIndex(), cellWidth);
-			}
-		} catch (Exception e) {
-			logger.debug("统计列宽数据不成功-" + value);
-		}
-		
 		
 	}
 	
@@ -513,16 +567,11 @@ public class ExcelFieldProcessor {
 		for(int i = 0; i < workbook.getNumberOfSheets(); i++) {
 			Sheet sheet = workbook.getSheetAt(i);
 			for(int j = 0 ; j < mappingEntries.size();j++) {
-				Integer cellWidth = _columnMaxWidthRecord.get(j);
-				if(cellWidth != null) {
-					sheet.setColumnWidth(j, (int)((cellWidth + 2) * 256));//1/256为一个字符单位
-				}else {
-					sheet.autoSizeColumn(j);
-				}
-				
+				int width = (mappingEntries.get(j).title.getBytes().length  + 4)* 256;//按两个字节计算
+				sheet.setColumnWidth(j, width);
+				//sheet.autoSizeColumn(j);//此方法不能自适应中文
 			}
 		}
-		
 		
 	}
 	
@@ -541,22 +590,73 @@ public class ExcelFieldProcessor {
 	}
 	
 	/**
-	 * 返回下一行
-	 * @return
+	 * 写入到目标文件
+	 * @param outFile
 	 */
-	private int nextRowIndex() {
-		return _rowIndex++;
+	public void outToFile(File outFile) {
+		FileOutputStream stream = null;
+		if(!outFile.getParentFile().exists()) {
+			outFile.getParentFile().mkdirs();//自动创建目录
+		}
+		
+		try {
+			outFile.createNewFile();
+			stream = new FileOutputStream(outFile);
+			this.workbook.write(stream);
+			stream.flush();
+		} catch (IOException e) {
+			throw new IllegalArgumentException(e);
+		}finally {
+			if(stream != null) {
+				try {
+					stream.close();
+				} catch (IOException e) {
+					//record log
+					logger.error("close failed - " + e.getMessage());
+				}
+			}
+		}
 	}
 	
-
-	public int getPageNumber() {
-		return pageNumber;
+	
+	/**
+	 * 返回下一行，位置移动
+	 * @return
+	 */
+	public int nextPosition() {
+		++_rowIndex;
+		return _rowIndex;
+	}
+	
+	/**
+	 * 当前行位置
+	 * @return
+	 */
+	public int position() {
+		return _rowIndex;
+	}
+	
+	/**
+	 * 重置位置
+	 */
+	public void resetPosition() {
+		_rowIndex = -1;
 	}
 
-	public void setPageNumber(int pageNumber) {
-		this.pageNumber = pageNumber;
+	/**
+	 * 当前工作表
+	 * @return
+	 */
+	public Sheet currentSheet() {
+		int sheetSize = this.workbook.getNumberOfSheets();
+		if(_sheetIndex <0 || _sheetIndex >= sheetSize) {
+			return null;
+		}
+		return this.workbook.getSheetAt(_sheetIndex);
 	}
-
+	
+	
+	
 	public int getPageSize() {
 		return pageSize;
 	}
@@ -589,7 +689,13 @@ public class ExcelFieldProcessor {
 		this.defaultDateFormat = defaultDateFormat;
 	}
 
-	
-	
+	/**
+	 * 获取处理过后的工作簿
+	 * @return
+	 */
+	public Workbook getWorkbook() {
+		return workbook;
+	}
+
 	
 }

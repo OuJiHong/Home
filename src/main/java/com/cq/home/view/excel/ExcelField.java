@@ -24,11 +24,4 @@ public @interface ExcelField {
 	 */
 	String value() default "";
 	
-	/**
-	 * 数据格式化，参考java.util.Formatter用法;
-	 * 如果是过于复杂的转换，应该使用对象类型的get方法进行处理
-	 * @return
-	 */
-	String format() default "";
-	
 }

@@ -132,7 +132,7 @@ public class AdminUserController extends BaseController{
 			}
 		}
 		
-		CommonExcelView excelView = new CommonExcelView("用户信息列表", excelList, UserExcelVo.class);
+		CommonExcelView excelView = new CommonExcelView(excelList, UserExcelVo.class, "用户信息列表");
 		return excelView;
 	}
 	
@@ -143,8 +143,8 @@ public class AdminUserController extends BaseController{
 	 */
 	@RequestMapping("importUserList")
 	public String importUserList(@RequestParam MultipartFile file, Model model) throws IOException {
-		ExcelFieldProcessor excelFieldProcessor = new ExcelFieldProcessor(UserExcelVo.class);
-		List<UserExcelVo> list = excelFieldProcessor.readAll(file.getInputStream());
+		ExcelFieldProcessor<UserExcelVo> excelFieldProcessor = new ExcelFieldProcessor<UserExcelVo>(UserExcelVo.class);
+		List<UserExcelVo> list = excelFieldProcessor.readAll(file.getInputStream(), true);
 		model.addAttribute("list", list);
 		return "/user/importUserList";
 	}

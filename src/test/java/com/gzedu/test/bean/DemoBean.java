@@ -1,3 +1,4 @@
+package com.gzedu.test.bean;
 
 public class DemoBean {
 	
