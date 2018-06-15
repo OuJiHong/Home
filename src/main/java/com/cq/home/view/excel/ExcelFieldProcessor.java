@@ -1,5 +1,6 @@
 package com.cq.home.view.excel;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,11 +31,12 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cq.home.exception.BizException;
+import com.cq.home.exception.ServiceException;
 /**
  * excelField 注解的处理,基于POI处理
  * @author 欧集红 
@@ -228,14 +230,21 @@ public class ExcelFieldProcessor <T> {
 	 */
 	public void load(InputStream excelInputStream) {
 		Workbook workbook = null;
+		//防止数据流的重复读取
 		try {
-			workbook = new HSSFWorkbook(excelInputStream);//excel2003
-		}catch(Exception e) {
+			ByteArrayInputStream copyInput = new ByteArrayInputStream(IOUtils.toByteArray(excelInputStream));
 			try {
-				workbook = new XSSFWorkbook(excelInputStream);//excel2007
-			} catch (IOException e1) {
-				throw new IllegalArgumentException("读取excel失败", e1);
+				workbook = new HSSFWorkbook(copyInput);//excel2003
+			}catch(Exception e) {
+				try {
+					copyInput.reset();
+					workbook = new XSSFWorkbook(copyInput);//excel2007
+				} catch (IOException e1) {
+					throw new IllegalArgumentException("读取excel失败", e1);
+				}
 			}
+		}catch (IOException e2) {
+			throw new IllegalArgumentException("复制excel的数据失败", e2);
 		}finally {
 			if(excelInputStream != null) {
 				try {
@@ -418,7 +427,7 @@ public class ExcelFieldProcessor <T> {
 					if(ignoreError) {
 						logger.debug("数据读取失败,在第'"+ position() +"'行记录：" + e.getMessage());
 					}else {
-						throw new BizException("数据读取失败,在第'"+  position() +"'行记录", e);
+						throw new ServiceException("数据读取失败,在第'"+  position() +"'行记录", e);
 					}
 				}
 			}
@@ -696,6 +705,22 @@ public class ExcelFieldProcessor <T> {
 	public Workbook getWorkbook() {
 		return workbook;
 	}
-
+	
+	
+	/**
+	 * 写入excel的便捷方法
+	 * @param dataList
+	 * @param dataType
+	 * @param outFile
+	 */
+	public static <C> Workbook writeDataToFile(Collection<C> dataCollection, Class<C> dataType, File outFile) {
+		ExcelFieldProcessor<C> excelProcessor = new ExcelFieldProcessor<C>(dataType);
+		excelProcessor.write(dataCollection);
+		excelProcessor.autoSizeColumn();
+		excelProcessor.outToFile(outFile);
+		return excelProcessor.getWorkbook();
+	}
+	
+	
 	
 }
