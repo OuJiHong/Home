@@ -121,14 +121,7 @@
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
 	</dependency>
-	
-       <!--  ojdbc -->
-      <dependency>
-	    <groupId>ojdbc</groupId>
-	    <artifactId>ojdbc</artifactId>
-	    <version>14</version>
-	</dependency>
-
+     
 
 	<!--  需要依赖连接池，否则不会自动配置数据源 , 参考DataSourceAutoConfiguration -->
 			
