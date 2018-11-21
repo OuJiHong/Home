@@ -31,7 +31,7 @@ public class Pageable implements Serializable{
 	 * 
 	 */
 	@ApiModelProperty("当前页码")
-	private Integer pageNumber = 1;
+	private Integer pageNum = 1;
 
 	public int getPageSize() {
 		return pageSize;
@@ -47,17 +47,17 @@ public class Pageable implements Serializable{
 		}
 	}
 
-	public int getPageNumber() {
-		return pageNumber;
+	public int getPageNum() {
+		return pageNum;
 	}
 
 	/**
 	 * 使用字符串兼容设置
 	 * @param pageNum
 	 */
-	public void setPageNum(String pageNumber) {
-		if(NumberUtils.isDigits(pageNumber)){
-			this.pageNumber = NumberUtils.toInt(pageNumber);
+	public void setPageNum(String pageNum) {
+		if(NumberUtils.isDigits(pageNum)){
+			this.pageNum = NumberUtils.toInt(pageNum);
 		}
 		
 	}
