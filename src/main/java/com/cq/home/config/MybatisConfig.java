@@ -1,37 +1,17 @@
 package com.cq.home.config;
 
-import java.util.Properties;
-
 import javax.sql.DataSource;
 
-import org.apache.commons.dbcp.BasicDataSourceFactory;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 public class MybatisConfig {
 	
-	/**
-	 * 数据配置文件
-	 */
-	private String dbcpPropName = "dbcp.properties";
-	
-	
-	/**
-	 * 在DataSourceAutoConfiguration中的DataSourceProperties会出现空指针，不知道什么情况。springBoot版本1.2系列
-	 * 所以自定义数据源
-	 */
-	@Bean
-	public DataSource dataSource() throws Exception{
-		Properties properties = new Properties();
-		properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(dbcpPropName));
-		return BasicDataSourceFactory.createDataSource(properties);
-	}
 
 	/**
 	 * 创建sqlSession工厂实体
@@ -61,11 +41,10 @@ public class MybatisConfig {
 	}*/
 	
 	/**
-	 * 自动扫描mapper接口
+	 * 自动扫描mapper接口,不能提前加载，会有properties属性注入不了的问题
 	 * @return
 	 */
 	@Bean
-	@DependsOn("sqlSessionFactory")
 	public MapperScannerConfigurer createMapperScannerConfigurer(){
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
 		mapperScannerConfigurer.setBasePackage("com.cq.home.dao");

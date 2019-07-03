@@ -14,7 +14,7 @@
   <parent>
 	  <groupId>org.springframework.boot</groupId>
 	  <artifactId>spring-boot-starter-parent</artifactId>
-	  <version>1.2.8.RELEASE</version>
+	  <version>2.1.4.RELEASE</version>
    </parent>
   
   <dependencies>
@@ -25,20 +25,12 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-web</artifactId>
       </dependency>
-      
+     
       <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context-support</artifactId>
-    </dependency>
-    
-     <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-tx</artifactId>
-    </dependency>
-     <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-jdbc</artifactId>
-    </dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-jdbc</artifactId>
+     </dependency>
+      
     
     <dependency>
         <groupId>org.springframework.security</groupId>
@@ -121,14 +113,7 @@
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
 	</dependency>
-     
 
-	<!--  需要依赖连接池，否则不会自动配置数据源 , 参考DataSourceAutoConfiguration -->
-			
-	<dependency>
-		<groupId>commons-dbcp</groupId>
-        <artifactId>commons-dbcp</artifactId>
-	</dependency>	
 	
 	<!--  整合swagger -->
 	 <dependency>
@@ -157,11 +142,10 @@
        </dependency>
        
        	<!--  mongodb support -->
-	   <dependency>
-	       <groupId>org.springframework.data</groupId>
-	       <artifactId>spring-data-mongodb</artifactId>
-<!-- 	       <version>2.0.6.RELEASE</version> -->
-	   </dependency>
+<!-- 	   <dependency> -->
+<!-- 	       <groupId>org.springframework.data</groupId> -->
+<!-- 	       <artifactId>spring-data-mongodb</artifactId> -->
+<!-- 	   </dependency> -->
 	   
 	   	
 		<!--  fastjson -->
@@ -176,21 +160,6 @@
   
   <build>
   	<finalName>home</finalName>
-  	<resources>
-  		<resource>
-  			<directory>src/main/resources</directory>
-  			<excludes>
-  				<exclude>dbcp.properties</exclude>
-  			</excludes>
-  		</resource>
-  		<resource>
-  			<directory>src/main/resources</directory>
-  			<includes>
-  				<include>dbcp.properties</include>
-  			</includes>
-  			<filtering>true</filtering>
-  		</resource>
-  	</resources>
     <plugins>
 		<plugin>
 			<groupId>org.springframework.boot</groupId>
@@ -200,8 +169,8 @@
 		<plugin>
 		  <artifactId>maven-compiler-plugin</artifactId>
 		  <configuration>
-		    <source>1.7</source>
-		    <target>1.7</target>
+		    <source>1.8</source>
+		    <target>1.8</target>
 		    <encoding>UTF-8</encoding>
 		  </configuration>
 		</plugin>

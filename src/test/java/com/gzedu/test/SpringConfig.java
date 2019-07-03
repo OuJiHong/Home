@@ -3,7 +3,7 @@ package com.gzedu.test;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.hibernate.ejb.HibernatePersistence;
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +15,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.SystemPropertyUtils;
-
-import com.mongodb.MongoClient;
-import com.mongodb.ServerAddress;
 
 /**
  * 基于注解的配置
@@ -67,7 +64,7 @@ public class SpringConfig {
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource datasource) {
 		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-		factoryBean.setPersistenceProviderClass(HibernatePersistence.class);
+		factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
 		/**
 		 *  classpath：只会到你的class路径中查找找文件。
 		 *	classpath*：不仅包含class路径，还包括jar文件中（class路径）进行查找。
@@ -95,29 +92,6 @@ public class SpringConfig {
 		return jpaTransactionManager;
 	}
 	
-	
-	/**
-	 * mongoclient
-	 * @return
-	 */
-	@Bean
-	public MongoClient mongoClient() throws Exception {
-		/*mongo.connect.host=
-				mongo.connect.database=eeum
-				mongo.connect.port=27017
-				mongo.connect.username=eeum
-				mongo.connect.password=eeum0521*/
-		
-		ServerAddress serverAddress = new ServerAddress("172.16.157.125", 27017);
-		//因为服务器没有启动授权认证，可以免密登录
-//		MongoCredential mognoCredential = MongoCredential.createScramSha1Credential("eeum", "admin", "eeum0521".toCharArray());
-		
-		MongoClient mongoClient = new MongoClient(serverAddress);
-		
-		return mongoClient;
-		
-		
-	}
 	
 	
 }
