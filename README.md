@@ -11,5 +11,7 @@
 * 发现更省事的架构：https://gitee.com/thinkgem/jeesite4
 * WEBGL效果:https://alteredqualia.com/
 * Git服务：https://github.com/gogs/gogs
+* 手机网页调试工具：https://github.com/liriliri/eruda
+
 ---
 
