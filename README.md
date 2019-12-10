@@ -12,6 +12,7 @@
 * WEBGL效果:https://alteredqualia.com/
 * Git服务：https://github.com/gogs/gogs
 * 手机网页调试工具：https://github.com/liriliri/eruda
-
+* 前端实用工具：https://www.baidufe.com/fehelper/
+* javaFx学习：http://www.javafxchina.net/main/
 ---
 
